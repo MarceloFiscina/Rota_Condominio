@@ -1,0 +1,909 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<!-- viewport-fit=cover: usa a tela toda em celulares com "notch".
+     NAO usamos maximum-scale: o zoom e tratado por nos (pinca no mapa). -->
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<!-- Projeto privado: pede para buscadores nao indexarem nem guardarem copia -->
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="theme-color" content="#163b52">
+<link rel="icon" href="data:image/png;base64,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">
+<title>Mapa do condomínio</title>
+<style>
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+
+/* ---------- Layout geral ----------
+   body vira uma coluna: cabecalho em cima, area do mapa ocupando o resto.
+   100dvh = altura "real" visivel no celular (100vh ignora a barra do navegador). */
+html,body{margin:0;height:100%;overflow:hidden;overscroll-behavior:none;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  background:#0b1824;color:#e7f4ff;-webkit-text-size-adjust:100%}
+body{display:flex;flex-direction:column;height:100dvh}
+
+header{display:flex;align-items:center;gap:14px;padding:10px 16px;background:
+  linear-gradient(135deg,#163b52 0%,#123447 58%,#0f2938 100%);
+  border-bottom:1px solid #356377;box-shadow:0 4px 18px #0005;flex-wrap:wrap;flex:0 0 auto;z-index:2}
+.brand{display:flex;align-items:center;gap:10px;min-width:220px;margin-right:auto}
+.brandLogo{width:42px;height:42px;object-fit:contain;border-radius:10px;background:#e7f4ff;padding:4px;
+  border:1px solid #83d8cb55;box-shadow:0 2px 10px #0005}
+.brandLogo.isFallback{background:linear-gradient(135deg,#278f85,#83d8cb);padding:8px}
+.brandText{display:flex;flex-direction:column;gap:2px;min-width:0}
+.brandText strong{color:#f1fbff;letter-spacing:.08em;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brandText small{color:#a4d0d0;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.toolbar{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+
+/* font-size:16px nos campos impede o iPhone de dar zoom automatico ao digitar */
+input,button{border:1px solid #356377;background:#0e2430;color:#e5fbfa;border-radius:8px;
+  padding:8px 10px;font-size:16px;font-family:inherit}
+button{cursor:pointer;background:linear-gradient(180deg,#3bb7a5,#278f85);font-size:14px;font-weight:700}
+button.secondary{background:#244353}
+button.danger{background:linear-gradient(180deg,#c15d59,#9c403f)}
+button:hover{filter:brightness(1.2)}
+
+#app{flex:1 1 auto;min-height:0;display:flex}
+#wrap{flex:1;min-width:0;min-height:0;position:relative}
+
+/* touch-action:none = o navegador NAO usa o gesto para rolar/dar zoom na pagina;
+   quem trata o toque e o nosso JavaScript (arrastar e pinca). E o ponto
+   principal da correcao do celular. */
+svg{width:100%;height:100%;display:block;cursor:grab;background:#0b1824;
+  touch-action:none;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}
+svg.drag{cursor:grabbing}
+#view{shape-rendering:geometricPrecision}
+
+aside{width:280px;padding:14px;background:linear-gradient(180deg,#11283a,#0d1f2d);
+  border-left:1px solid #356377;overflow:auto;flex:0 0 auto}
+.card{border:1px solid #2b5264;border-radius:12px;padding:12px;margin-bottom:10px;font-size:12px;
+  background:#102238aa;box-shadow:0 5px 16px #0002}
+.card h3{font-size:11px;color:#83d8cb;margin:0 0 9px;text-transform:uppercase;letter-spacing:.09em}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #1a3048}
+.ok{color:#79d9a8}.warn{color:#e7c66c}
+
+/* ---------- Botoes de zoom sobre o mapa ---------- */
+.zoomctl{position:absolute;right:10px;bottom:10px;display:flex;flex-direction:column;gap:6px}
+.zoomctl button{width:44px;height:44px;padding:0;font-size:22px;line-height:1;background:#163b52dd;
+  border:1px solid #356377;backdrop-filter:blur(2px)}
+.mobileOnly{display:none}
+
+/* ---------- Elementos do mapa ---------- */
+.blocked{fill:#7d3e43!important;stroke:#e28b85!important}
+.house{cursor:pointer}.house:hover{filter:brightness(1.35)}
+.house.selected rect{fill:#d9a441!important;stroke:#fff1c2!important;stroke-width:3!important}
+.house.selected text{fill:#2e2411!important;font-weight:800}
+.laser{fill:url(#laser);stroke:#d954c6;stroke-width:3}.laser.typo{stroke:#e0a04a}
+.road{fill:#24475b;stroke:#6d95a3;stroke-width:3}
+.admin .road{cursor:pointer}               /* so mostra a "maozinha" para o admin */
+.road.exit{fill:#4f3b1b;stroke:#e2b35a;stroke-width:3}
+.road.entry{fill:#214b3d;stroke:#62c995;stroke-width:3}
+.roadLabel{fill:#d9ecff;font-size:13px;font-weight:800;pointer-events:none}
+.route,.routeGlow,.routeFallback,.routeFallbackGlow,.routeBall{pointer-events:none}
+.routeGlow{fill:none;stroke:#e2aa3f;stroke-width:13;opacity:.24;stroke-linecap:round;stroke-linejoin:round}
+.route{fill:none;stroke:#ffd166;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 2px #70531b)}
+.routeFallbackGlow{fill:none;stroke:#d9793b;stroke-width:15;opacity:.28;stroke-linecap:round;stroke-linejoin:round}
+.routeFallback{fill:none;stroke:#d9793b;stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+.routeBall{fill:#fff3c4;stroke:#d99b32;stroke-width:3;filter:drop-shadow(0 0 7px #c58b2c)}
+.routeBall.fallback{fill:#ffead6;stroke:#d9793b;stroke-width:3}
+/* Em telas de toque, "filter" (sombras) deixa o arrastar travado: desligamos */
+@media (hover:none){.route,.routeBall{filter:none}.house:hover{filter:none}}
+
+/* ---------- Legenda ---------- */
+.legend{display:grid;gap:6px}
+.swatch{display:inline-block;width:20px;height:10px;border-radius:5px;margin-right:6px;vertical-align:middle}
+.entrySwatch{background:#214b3d;border:2px solid #62c995}
+.exitSwatch{background:#4f3b1b;border:2px solid #e2b35a}
+.routeSwatch{background:#ffd166;box-shadow:0 0 4px #d99b32}
+
+/* ---------- Janela de login (substitui prompt(), que mostrava a senha) ---------- */
+.modal{position:fixed;inset:0;background:#000a;display:flex;align-items:center;justify-content:center;z-index:10;padding:16px}
+.modal form{background:#123447;border:1px solid #356377;border-radius:10px;padding:16px;width:100%;max-width:340px;display:grid;gap:10px}
+.modal h3{margin:0;color:#83d8cb;font-size:15px}
+.modal .actions{display:flex;gap:8px;justify-content:flex-end}
+
+/* ---------- CELULAR / TELA ESTREITA ---------- */
+@media(max-width:800px){
+  header{padding:calc(8px + env(safe-area-inset-top)) 8px 8px}
+  .brand{width:100%;min-width:0;margin:0}
+  .brandLogo{width:38px;height:38px}
+  .toolbar{width:100%;display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:6px}
+  .toolbar input{min-width:0;width:100%}
+  .toolbar #admin{grid-column:1/-1}
+  button{min-height:40px}                     /* alvo de toque confortavel */
+  #app{flex-direction:column}                 /* mapa em cima, painel embaixo */
+  aside{width:100%;max-height:30dvh;border-left:0;border-top:1px solid #2b5264;
+    display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px 8px calc(8px + env(safe-area-inset-bottom))}
+  .card{margin:0}.card:last-child{grid-column:1/-1}
+  .mobileOnly{display:block}
+  body.noside aside{display:none}             /* botao ☰ esconde o painel */
+}
+</style></head><body>
+
+<header>
+  <div class="brand">
+    <img class="brandLogo" id="brandLogo" src="data:image/png;base64,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" alt="Logo do condomínio">
+    <div class="brandText"><strong id="condoName">Residencial Jardim Azul</strong><small id="condoSubtitle">Mapa de acesso e localização</small></div>
+  </div>
+  <div class="toolbar">
+    <input id="search" type="text" inputmode="numeric" pattern="[0-9]*" autocomplete="off" placeholder="Número da casa">
+    <button id="go">Mostrar rota</button>
+    <button id="clear" class="secondary">Limpar</button>
+    <button id="zgps" class="secondary" title="Minha localização no mapa">📍 GPS</button>
+    <button id="admin" class="danger">Administração</button>
+  </div>
+</header>
+
+<div id="app">
+  <div id="wrap">
+    <!-- O viewBox real e definido pelo JavaScript conforme o tamanho da planilha -->
+    <svg id="map" viewBox="0 0 3500 1750" preserveAspectRatio="xMidYMid meet">
+      <defs>
+        <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M60 0H0V60" fill="none" stroke="#173044"/></pattern>
+        <pattern id="laser" width="18" height="18" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="18" height="18" fill="#281d30"/><path d="M0 0V18" stroke="#d954c6" stroke-width="6"/></pattern>
+        <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 1L10 5L0 9z" fill="#ffd166"/></marker>
+        <marker id="arrowBlocked" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 1L10 5L0 9z" fill="#d9793b"/></marker>
+      </defs>
+      <!-- #view e o grupo que recebe translate+scale (zoom e arrastar) -->
+      <g id="view">
+        <rect id="bg" width="3500" height="1750" fill="url(#grid)"/>
+        <g id="plantBase"></g><g id="roads"></g><g id="lasers"></g>
+        <g id="route"></g><g id="houses"></g><g id="portaria"></g>
+        <g id="userLocation"></g> <!-- Camada da Geolocalização -->
+      </g>
+    </svg>
+    <div class="zoomctl">
+      <button id="zin" aria-label="Aproximar">+</button>
+      <button id="zout" aria-label="Afastar">−</button>
+      <button id="zfit" class="secondary" aria-label="Ver mapa inteiro">⌂</button>
+      <button id="ztoggle" class="secondary mobileOnly" aria-label="Mostrar/ocultar painel">☰</button>
+    </div>
+  </div>
+
+  <aside>
+    <div class="card"><h3>Status</h3><div id="status">Aguardando destino.</div></div>
+    <div class="card"><h3>Rota</h3><div id="details">Nenhuma rota calculada.</div></div>
+    <div class="card"><h3>Ruas bloqueadas</h3><div id="blockedList">Nenhuma rua bloqueada.</div></div>
+    <div class="card"><h3>Legenda</h3><div class="legend">
+      <div><span class="swatch entrySwatch"></span> Entrada</div>
+      <div><span class="swatch exitSwatch"></span> Saída</div>
+      <div><span class="swatch routeSwatch"></span> Rota</div>
+      <div><span class="swatch" style="background:#d9793b"></span> Alternativa (rua bloqueada)</div>
+    </div></div>
+    <div class="card"><small id="storageInfo">Verificando armazenamento dos bloqueios...</small></div>
+
+    <!-- SEU CARD DE PROPAGANDA E CONTATO DE AUTOMÇÃO -->
+    <div class="card" style="border: 1px solid #3bb7a5; background: rgba(22, 59, 82, 0.7);">
+      <h3>💡 Automação & Tecnologia</h3>
+      <p style="margin: 4px 0 8px; color: #e7f4ff; line-height: 1.4;">
+        Desenvolvimento de sistemas, automação e soluções personalizadas sob medida.
+      </p>
+      <div style="font-weight: bold; color: #83d8cb;">
+        Marcelo Fiscina | Eng. de Controle & Automação
+      </div>
+      <a href="https://wa.me/5575998828918?text=Olá%20Marcelo,%20vi%20o%20mapa%20do%20condomínio%20e%20gostaria%20de%20saber%20mais%20sobre%20seus%20serviços%20de%20automação." 
+         target="_blank" rel="noopener" 
+         style="display: inline-block; margin-top: 8px; padding: 6px 12px; background: #25d366; color: #000; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 11px;">
+        💬 Falar no WhatsApp
+      </a>
+    </div>
+
+  </aside>
+</div>
+
+<!-- Janela de login do administrador -->
+<div id="modal" class="modal" hidden>
+  <form id="loginForm">
+    <h3 id="mTitle">Administração</h3>
+    <input id="mEmail" type="email" autocomplete="username" placeholder="E-mail">
+    <input id="mPass" type="password" autocomplete="current-password" placeholder="Senha">
+    <div class="actions"><button type="button" id="mCancel" class="secondary">Cancelar</button><button type="submit">Entrar</button></div>
+  </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+'use strict';
+// ================================================================
+// LOGICA DO MAPA: casas, ruas, bloqueios, rotas, zoom e administrador
+// ================================================================
+// ================================================================
+// GEOLOCALIZAÇÃO ("Você está aqui") & INSPEÇÃO
+// ================================================================
+// O seletor precisa existir antes de qualquer código que use $('#...').
+// A declaração original estava mais abaixo e abortava o script com ReferenceError.
+const $=s=>document.querySelector(s);
+const userLocationG = $('#userLocation');
+let watchId = null;
+let isTracking = false;
+
+// 1) PONTOS DE REFERÊNCIA (Insira as coordenadas reais de Lat/Lng do Google Maps e X/Y do seu SVG)
+const GPS_REF = {
+  p1: { lat: -12.134567, lng: -38.412345, x: 100, y: 150 },   // Exemplo: Portaria/Entrada
+  p2: { lat: -12.138900, lng: -38.416800, x: 3200, y: 1600 }  // Exemplo: Ponto no fundo do condomínio
+};
+
+// Converte a coordenada geográfica (GPS) para coordenada cartesiana do SVG
+function gpsToSvg(lat, lng) {
+  const scaleX = (GPS_REF.p2.x - GPS_REF.p1.x) / (GPS_REF.p2.lng - GPS_REF.p1.lng);
+  const scaleY = (GPS_REF.p2.y - GPS_REF.p1.y) / (GPS_REF.p2.lat - GPS_REF.p1.lat);
+  
+  const x = GPS_REF.p1.x + (lng - GPS_REF.p1.lng) * scaleX;
+  const y = GPS_REF.p1.y + (lat - GPS_REF.p1.lat) * scaleY;
+  return { x, y };
+}
+
+// Alterna o rastreamento via GPS
+function toggleGeolocation() {
+  if (!navigator.geolocation) {
+    alert('Seu navegador não suporta geolocalização.');
+    return;
+  }
+
+  const btn = $('#zgps');
+  if (isTracking) {
+    if (watchId !== null) navigator.geolocation.clearWatch(watchId);
+    watchId = null;
+    isTracking = false;
+    btn.style.background = '#244353';
+    userLocationG.innerHTML = '';
+    statusEl.textContent = 'Geolocalização desativada.';
+    return;
+  }
+
+  btn.style.background = '#3bb7a5';
+  isTracking = true;
+  statusEl.textContent = 'Obtendo sua localização...';
+
+  watchId = navigator.geolocation.watchPosition(
+    position => {
+      const { latitude, longitude, accuracy } = position.coords;
+      const pt = gpsToSvg(latitude, longitude);
+
+      userLocationG.innerHTML = '';
+      
+      // Anel azul ao redor
+      const ring = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      ring.setAttribute('cx', pt.x);
+      ring.setAttribute('cy', pt.y);
+      ring.setAttribute('r', '24');
+      ring.setAttribute('fill', '#3b82f6');
+      ring.setAttribute('opacity', '0.35');
+      userLocationG.appendChild(ring);
+
+      // Ponto do usuário
+      const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      dot.setAttribute('cx', pt.x);
+      dot.setAttribute('cy', pt.y);
+      dot.setAttribute('r', '10');
+      dot.setAttribute('fill', '#3b82f6');
+      dot.setAttribute('stroke', '#ffffff');
+      dot.setAttribute('stroke-width', '3');
+      userLocationG.appendChild(dot);
+
+      // Rótulo
+      const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      label.setAttribute('x', pt.x);
+      label.setAttribute('y', pt.y - 18);
+      label.setAttribute('text-anchor', 'middle');
+      label.setAttribute('fill', '#60a5fa');
+      label.setAttribute('font-size', '14');
+      label.setAttribute('font-weight', 'bold');
+      label.textContent = 'Você está aqui';
+      userLocationG.appendChild(label);
+
+      statusEl.innerHTML = `<span class="ok">GPS Ativo (precisão: ${Math.round(accuracy)}m)</span>`;
+    },
+    error => {
+      console.error(error);
+      statusEl.innerHTML = `<span class="warn">Erro de GPS: ${error.message}</span>`;
+      isTracking = false;
+      btn.style.background = '#244353';
+    },
+    { enableHighAccuracy: true, maximumAge: 5000, timeout: 10000 }
+  );
+}
+
+$('#zgps').onclick = toggleGeolocation;
+
+// ---------- Dados injetados pelo Python ----------
+const SUPABASE_URL="https://wzogqdnhrmppufjazimx.supabase.co", SUPABASE_KEY="sb_publishable_nTQxSoxfh-k6b9Gvn8BQHg_vfzPNsIs";
+const HOUSES=[{"number": 449, "row": 0, "col": 11, "row2": 0, "col2": 11}, {"number": 448, "row": 0, "col": 12, "row2": 0, "col2": 12}, {"number": 447, "row": 0, "col": 13, "row2": 0, "col2": 13}, {"number": 446, "row": 0, "col": 14, "row2": 0, "col2": 14}, {"number": 445, "row": 0, "col": 15, "row2": 0, "col2": 15}, {"number": 444, "row": 0, "col": 16, "row2": 0, "col2": 16}, {"number": 443, "row": 0, "col": 17, "row2": 0, "col2": 17}, {"number": 442, "row": 0, "col": 18, "row2": 0, "col2": 18}, {"number": 441, "row": 0, "col": 19, "row2": 0, "col2": 19}, {"number": 440, "row": 0, "col": 20, "row2": 0, "col2": 20}, {"number": 439, "row": 0, "col": 21, "row2": 0, "col2": 21}, {"number": 438, "row": 0, "col": 22, "row2": 0, "col2": 22}, {"number": 437, "row": 0, "col": 23, "row2": 0, "col2": 23}, {"number": 436, "row": 0, "col": 24, "row2": 0, "col2": 24}, {"number": 435, "row": 0, "col": 25, "row2": 0, "col2": 25}, {"number": 434, "row": 0, "col": 26, "row2": 0, "col2": 26}, {"number": 433, "row": 0, "col": 27, "row2": 0, "col2": 27}, {"number": 432, "row": 0, "col": 28, "row2": 0, "col2": 28}, {"number": 431, "row": 0, "col": 29, "row2": 0, "col2": 29}, {"number": 430, "row": 0, "col": 30, "row2": 0, "col2": 30}, {"number": 411, "row": 2, "col": 12, "row2": 2, "col2": 12}, {"number": 412, "row": 2, "col": 13, "row2": 2, "col2": 13}, {"number": 413, "row": 2, "col": 14, "row2": 2, "col2": 14}, {"number": 414, "row": 2, "col": 15, "row2": 2, "col2": 15}, {"number": 415, "row": 2, "col": 16, "row2": 2, "col2": 16}, {"number": 416, "row": 2, "col": 17, "row2": 2, "col2": 17}, {"number": 417, "row": 2, "col": 18, "row2": 2, "col2": 18}, {"number": 418, "row": 2, "col": 19, "row2": 2, "col2": 19}, {"number": 419, "row": 2, "col": 20, "row2": 2, "col2": 20}, {"number": 420, "row": 2, "col": 21, "row2": 2, "col2": 21}, {"number": 421, "row": 2, "col": 22, "row2": 2, "col2": 22}, {"number": 422, "row": 2, "col": 23, "row2": 2, "col2": 23}, {"number": 423, "row": 2, "col": 24, "row2": 2, "col2": 24}, {"number": 424, "row": 2, "col": 25, "row2": 2, "col2": 25}, {"number": 425, "row": 2, "col": 26, "row2": 2, "col2": 26}, {"number": 426, "row": 2, "col": 27, "row2": 2, "col2": 27}, {"number": 427, "row": 2, "col": 28, "row2": 2, "col2": 28}, {"number": 428, "row": 2, "col": 29, "row2": 2, "col2": 29}, {"number": 429, "row": 2, "col": 30, "row2": 2, "col2": 30}, {"number": 410, "row": 3, "col": 12, "row2": 3, "col2": 12}, {"number": 409, "row": 3, "col": 13, "row2": 3, "col2": 13}, {"number": 408, "row": 3, "col": 14, "row2": 3, "col2": 14}, {"number": 407, "row": 3, "col": 15, "row2": 3, "col2": 15}, {"number": 406, "row": 3, "col": 16, "row2": 3, "col2": 16}, {"number": 405, "row": 3, "col": 17, "row2": 3, "col2": 17}, {"number": 404, "row": 3, "col": 18, "row2": 3, "col2": 18}, {"number": 403, "row": 3, "col": 19, "row2": 3, "col2": 19}, {"number": 402, "row": 3, "col": 20, "row2": 3, "col2": 20}, {"number": 401, "row": 3, "col": 21, "row2": 3, "col2": 21}, {"number": 400, "row": 3, "col": 22, "row2": 3, "col2": 22}, {"number": 399, "row": 3, "col": 23, "row2": 3, "col2": 23}, {"number": 398, "row": 3, "col": 24, "row2": 3, "col2": 24}, {"number": 397, "row": 3, "col": 25, "row2": 3, "col2": 25}, {"number": 396, "row": 3, "col": 26, "row2": 3, "col2": 26}, {"number": 395, "row": 3, "col": 27, "row2": 3, "col2": 27}, {"number": 394, "row": 3, "col": 28, "row2": 3, "col2": 28}, {"number": 393, "row": 3, "col": 29, "row2": 3, "col2": 29}, {"number": 392, "row": 3, "col": 30, "row2": 3, "col2": 30}, {"number": 351, "row": 5, "col": 1, "row2": 5, "col2": 1}, {"number": 352, "row": 5, "col": 2, "row2": 5, "col2": 2}, {"number": 353, "row": 5, "col": 3, "row2": 5, "col2": 3}, {"number": 354, "row": 5, "col": 4, "row2": 5, "col2": 4}, {"number": 355, "row": 5, "col": 5, "row2": 5, "col2": 5}, {"number": 356, "row": 5, "col": 6, "row2": 5, "col2": 6}, {"number": 357, "row": 5, "col": 7, "row2": 5, "col2": 7}, {"number": 358, "row": 5, "col": 8, "row2": 5, "col2": 8}, {"number": 359, "row": 5, "col": 9, "row2": 5, "col2": 9}, {"number": 360, "row": 5, "col": 10, "row2": 5, "col2": 10}, {"number": 361, "row": 5, "col": 11, "row2": 5, "col2": 11}, {"number": 362, "row": 5, "col": 12, "row2": 5, "col2": 12}, {"number": 363, "row": 5, "col": 13, "row2": 5, "col2": 13}, {"number": 364, "row": 5, "col": 14, "row2": 5, "col2": 14}, {"number": 365, "row": 5, "col": 15, "row2": 5, "col2": 15}, {"number": 366, "row": 5, "col": 16, "row2": 5, "col2": 16}, {"number": 367, "row": 5, "col": 17, "row2": 5, "col2": 17}, {"number": 391, "row": 5, "col": 19, "row2": 5, "col2": 19}, {"number": 390, "row": 5, "col": 20, "row2": 5, "col2": 20}, {"number": 389, "row": 5, "col": 21, "row2": 5, "col2": 21}, {"number": 388, "row": 5, "col": 22, "row2": 5, "col2": 22}, {"number": 387, "row": 5, "col": 23, "row2": 5, "col2": 23}, {"number": 386, "row": 5, "col": 24, "row2": 5, "col2": 24}, {"number": 385, "row": 5, "col": 25, "row2": 5, "col2": 25}, {"number": 384, "row": 5, "col": 26, "row2": 5, "col2": 26}, {"number": 383, "row": 5, "col": 27, "row2": 5, "col2": 27}, {"number": 382, "row": 5, "col": 28, "row2": 5, "col2": 28}, {"number": 381, "row": 5, "col": 29, "row2": 5, "col2": 29}, {"number": 380, "row": 5, "col": 30, "row2": 5, "col2": 30}, {"number": 350, "row": 6, "col": 1, "row2": 6, "col2": 1}, {"number": 349, "row": 6, "col": 2, "row2": 6, "col2": 2}, {"number": 348, "row": 6, "col": 3, "row2": 6, "col2": 3}, {"number": 347, "row": 6, "col": 4, "row2": 6, "col2": 4}, {"number": 346, "row": 6, "col": 5, "row2": 6, "col2": 5}, {"number": 345, "row": 6, "col": 6, "row2": 6, "col2": 6}, {"number": 344, "row": 6, "col": 7, "row2": 6, "col2": 7}, {"number": 343, "row": 6, "col": 8, "row2": 6, "col2": 8}, {"number": 342, "row": 6, "col": 9, "row2": 6, "col2": 9}, {"number": 341, "row": 6, "col": 10, "row2": 6, "col2": 10}, {"number": 340, "row": 6, "col": 11, "row2": 6, "col2": 11}, {"number": 339, "row": 6, "col": 12, "row2": 6, "col2": 12}, {"number": 338, "row": 6, "col": 13, "row2": 6, "col2": 13}, {"number": 337, "row": 6, "col": 14, "row2": 6, "col2": 14}, {"number": 336, "row": 6, "col": 15, "row2": 6, "col2": 15}, {"number": 335, "row": 6, "col": 16, "row2": 6, "col2": 16}, {"number": 334, "row": 6, "col": 17, "row2": 6, "col2": 17}, {"number": 368, "row": 6, "col": 19, "row2": 6, "col2": 19}, {"number": 369, "row": 6, "col": 20, "row2": 6, "col2": 20}, {"number": 370, "row": 6, "col": 21, "row2": 6, "col2": 21}, {"number": 371, "row": 6, "col": 22, "row2": 6, "col2": 22}, {"number": 372, "row": 6, "col": 23, "row2": 6, "col2": 23}, {"number": 373, "row": 6, "col": 24, "row2": 6, "col2": 24}, {"number": 374, "row": 6, "col": 25, "row2": 6, "col2": 25}, {"number": 375, "row": 6, "col": 26, "row2": 6, "col2": 26}, {"number": 376, "row": 6, "col": 27, "row2": 6, "col2": 27}, {"number": 377, "row": 6, "col": 28, "row2": 6, "col2": 28}, {"number": 378, "row": 6, "col": 29, "row2": 6, "col2": 29}, {"number": 379, "row": 6, "col": 30, "row2": 6, "col2": 30}, {"number": 322, "row": 8, "col": 0, "row2": 8, "col2": 0}, {"number": 323, "row": 8, "col": 1, "row2": 8, "col2": 1}, {"number": 324, "row": 8, "col": 2, "row2": 8, "col2": 2}, {"number": 325, "row": 8, "col": 3, "row2": 8, "col2": 3}, {"number": 326, "row": 8, "col": 4, "row2": 8, "col2": 4}, {"number": 327, "row": 8, "col": 5, "row2": 8, "col2": 5}, {"number": 328, "row": 8, "col": 6, "row2": 8, "col2": 6}, {"number": 329, "row": 8, "col": 7, "row2": 8, "col2": 7}, {"number": 330, "row": 8, "col": 8, "row2": 8, "col2": 8}, {"number": 331, "row": 8, "col": 9, "row2": 8, "col2": 9}, {"number": 332, "row": 8, "col": 10, "row2": 8, "col2": 10}, {"number": 333, "row": 8, "col": 11, "row2": 8, "col2": 11}, {"number": 298, "row": 8, "col": 19, "row2": 8, "col2": 19}, {"number": 299, "row": 8, "col": 20, "row2": 8, "col2": 20}, {"number": 300, "row": 8, "col": 21, "row2": 8, "col2": 21}, {"number": 301, "row": 8, "col": 22, "row2": 8, "col2": 22}, {"number": 302, "row": 8, "col": 23, "row2": 8, "col2": 23}, {"number": 303, "row": 8, "col": 24, "row2": 8, "col2": 24}, {"number": 304, "row": 8, "col": 25, "row2": 8, "col2": 25}, {"number": 305, "row": 8, "col": 26, "row2": 8, "col2": 26}, {"number": 306, "row": 8, "col": 27, "row2": 8, "col2": 27}, {"number": 307, "row": 8, "col": 28, "row2": 8, "col2": 28}, {"number": 308, "row": 8, "col": 29, "row2": 8, "col2": 29}, {"number": 309, "row": 8, "col": 30, "row2": 8, "col2": 30}, {"number": 321, "row": 9, "col": 0, "row2": 9, "col2": 0}, {"number": 320, "row": 9, "col": 1, "row2": 9, "col2": 1}, {"number": 319, "row": 9, "col": 2, "row2": 9, "col2": 2}, {"number": 318, "row": 9, "col": 3, "row2": 9, "col2": 3}, {"number": 317, "row": 9, "col": 4, "row2": 9, "col2": 4}, {"number": 316, "row": 9, "col": 5, "row2": 9, "col2": 5}, {"number": 315, "row": 9, "col": 6, "row2": 9, "col2": 6}, {"number": 314, "row": 9, "col": 7, "row2": 9, "col2": 7}, {"number": 313, "row": 9, "col": 8, "row2": 9, "col2": 8}, {"number": 312, "row": 9, "col": 9, "row2": 9, "col2": 9}, {"number": 311, "row": 9, "col": 10, "row2": 9, "col2": 10}, {"number": 310, "row": 9, "col": 11, "row2": 9, "col2": 11}, {"number": 297, "row": 9, "col": 19, "row2": 9, "col2": 19}, {"number": 296, "row": 9, "col": 20, "row2": 9, "col2": 20}, {"number": 295, "row": 9, "col": 21, "row2": 9, "col2": 21}, {"number": 294, "row": 9, "col": 22, "row2": 9, "col2": 22}, {"number": 293, "row": 9, "col": 23, "row2": 9, "col2": 23}, {"number": 292, "row": 9, "col": 24, "row2": 9, "col2": 24}, {"number": 291, "row": 9, "col": 25, "row2": 9, "col2": 25}, {"number": 290, "row": 9, "col": 26, "row2": 9, "col2": 26}, {"number": 289, "row": 9, "col": 27, "row2": 9, "col2": 27}, {"number": 288, "row": 9, "col": 28, "row2": 9, "col2": 28}, {"number": 287, "row": 9, "col": 29, "row2": 9, "col2": 29}, {"number": 286, "row": 9, "col": 30, "row2": 9, "col2": 30}, {"number": 240, "row": 11, "col": 2, "row2": 11, "col2": 2}, {"number": 241, "row": 11, "col": 3, "row2": 11, "col2": 3}, {"number": 242, "row": 11, "col": 4, "row2": 11, "col2": 4}, {"number": 243, "row": 11, "col": 5, "row2": 11, "col2": 5}, {"number": 244, "row": 11, "col": 6, "row2": 11, "col2": 6}, {"number": 245, "row": 11, "col": 7, "row2": 11, "col2": 7}, {"number": 246, "row": 11, "col": 8, "row2": 11, "col2": 8}, {"number": 247, "row": 11, "col": 9, "row2": 11, "col2": 9}, {"number": 248, "row": 11, "col": 10, "row2": 11, "col2": 10}, {"number": 249, "row": 11, "col": 11, "row2": 11, "col2": 11}, {"number": 285, "row": 11, "col": 13, "row2": 11, "col2": 13}, {"number": 284, "row": 11, "col": 14, "row2": 11, "col2": 14}, {"number": 283, "row": 11, "col": 15, "row2": 11, "col2": 15}, {"number": 282, "row": 11, "col": 16, "row2": 11, "col2": 16}, {"number": 281, "row": 11, "col": 17, "row2": 11, "col2": 17}, {"number": 280, "row": 11, "col": 18, "row2": 11, "col2": 18}, {"number": 279, "row": 11, "col": 19, "row2": 11, "col2": 19}, {"number": 278, "row": 11, "col": 20, "row2": 11, "col2": 20}, {"number": 277, "row": 11, "col": 21, "row2": 11, "col2": 21}, {"number": 276, "row": 11, "col": 22, "row2": 11, "col2": 22}, {"number": 275, "row": 11, "col": 23, "row2": 11, "col2": 23}, {"number": 274, "row": 11, "col": 24, "row2": 11, "col2": 24}, {"number": 273, "row": 11, "col": 25, "row2": 11, "col2": 25}, {"number": 272, "row": 11, "col": 26, "row2": 11, "col2": 26}, {"number": 271, "row": 11, "col": 27, "row2": 11, "col2": 27}, {"number": 270, "row": 11, "col": 28, "row2": 11, "col2": 28}, {"number": 269, "row": 11, "col": 29, "row2": 11, "col2": 29}, {"number": 268, "row": 11, "col": 30, "row2": 11, "col2": 30}, {"number": 239, "row": 12, "col": 2, "row2": 12, "col2": 2}, {"number": 238, "row": 12, "col": 3, "row2": 12, "col2": 3}, {"number": 237, "row": 12, "col": 4, "row2": 12, "col2": 4}, {"number": 236, "row": 12, "col": 5, "row2": 12, "col2": 5}, {"number": 235, "row": 12, "col": 6, "row2": 12, "col2": 6}, {"number": 234, "row": 12, "col": 7, "row2": 12, "col2": 7}, {"number": 233, "row": 12, "col": 8, "row2": 12, "col2": 8}, {"number": 232, "row": 12, "col": 9, "row2": 12, "col2": 9}, {"number": 231, "row": 12, "col": 10, "row2": 12, "col2": 10}, {"number": 230, "row": 12, "col": 11, "row2": 12, "col2": 11}, {"number": 250, "row": 12, "col": 13, "row2": 12, "col2": 13}, {"number": 251, "row": 12, "col": 14, "row2": 12, "col2": 14}, {"number": 252, "row": 12, "col": 15, "row2": 12, "col2": 15}, {"number": 253, "row": 12, "col": 16, "row2": 12, "col2": 16}, {"number": 254, "row": 12, "col": 17, "row2": 12, "col2": 17}, {"number": 255, "row": 12, "col": 18, "row2": 12, "col2": 18}, {"number": 256, "row": 12, "col": 19, "row2": 12, "col2": 19}, {"number": 257, "row": 12, "col": 20, "row2": 12, "col2": 20}, {"number": 258, "row": 12, "col": 21, "row2": 12, "col2": 21}, {"number": 259, "row": 12, "col": 22, "row2": 12, "col2": 22}, {"number": 260, "row": 12, "col": 23, "row2": 12, "col2": 23}, {"number": 261, "row": 12, "col": 24, "row2": 12, "col2": 24}, {"number": 262, "row": 12, "col": 25, "row2": 12, "col2": 25}, {"number": 263, "row": 12, "col": 26, "row2": 12, "col2": 26}, {"number": 264, "row": 12, "col": 27, "row2": 12, "col2": 27}, {"number": 265, "row": 12, "col": 28, "row2": 12, "col2": 28}, {"number": 266, "row": 12, "col": 29, "row2": 12, "col2": 29}, {"number": 267, "row": 12, "col": 30, "row2": 12, "col2": 30}, {"number": 220, "row": 14, "col": 2, "row2": 14, "col2": 2}, {"number": 221, "row": 14, "col": 3, "row2": 14, "col2": 3}, {"number": 222, "row": 14, "col": 4, "row2": 14, "col2": 4}, {"number": 223, "row": 14, "col": 5, "row2": 14, "col2": 5}, {"number": 224, "row": 14, "col": 6, "row2": 14, "col2": 6}, {"number": 225, "row": 14, "col": 7, "row2": 14, "col2": 7}, {"number": 226, "row": 14, "col": 8, "row2": 14, "col2": 8}, {"number": 227, "row": 14, "col": 9, "row2": 14, "col2": 9}, {"number": 228, "row": 14, "col": 10, "row2": 14, "col2": 10}, {"number": 229, "row": 14, "col": 11, "row2": 14, "col2": 11}, {"number": 209, "row": 14, "col": 13, "row2": 14, "col2": 13}, {"number": 208, "row": 14, "col": 14, "row2": 14, "col2": 14}, {"number": 207, "row": 14, "col": 15, "row2": 14, "col2": 15}, {"number": 206, "row": 14, "col": 16, "row2": 14, "col2": 16}, {"number": 205, "row": 14, "col": 17, "row2": 14, "col2": 17}, {"number": 204, "row": 14, "col": 18, "row2": 14, "col2": 18}, {"number": 203, "row": 14, "col": 19, "row2": 14, "col2": 19}, {"number": 202, "row": 14, "col": 20, "row2": 14, "col2": 20}, {"number": 201, "row": 14, "col": 21, "row2": 14, "col2": 21}, {"number": 200, "row": 14, "col": 22, "row2": 14, "col2": 22}, {"number": 199, "row": 14, "col": 23, "row2": 14, "col2": 23}, {"number": 198, "row": 14, "col": 24, "row2": 14, "col2": 24}, {"number": 197, "row": 14, "col": 25, "row2": 14, "col2": 25}, {"number": 196, "row": 14, "col": 26, "row2": 14, "col2": 26}, {"number": 195, "row": 14, "col": 27, "row2": 14, "col2": 27}, {"number": 194, "row": 14, "col": 28, "row2": 14, "col2": 28}, {"number": 193, "row": 14, "col": 29, "row2": 14, "col2": 29}, {"number": 192, "row": 14, "col": 30, "row2": 14, "col2": 30}, {"number": 219, "row": 15, "col": 2, "row2": 15, "col2": 2}, {"number": 218, "row": 15, "col": 3, "row2": 15, "col2": 3}, {"number": 217, "row": 15, "col": 4, "row2": 15, "col2": 4}, {"number": 216, "row": 15, "col": 5, "row2": 15, "col2": 5}, {"number": 215, "row": 15, "col": 6, "row2": 15, "col2": 6}, {"number": 214, "row": 15, "col": 7, "row2": 15, "col2": 7}, {"number": 213, "row": 15, "col": 8, "row2": 15, "col2": 8}, {"number": 212, "row": 15, "col": 9, "row2": 15, "col2": 9}, {"number": 211, "row": 15, "col": 10, "row2": 15, "col2": 10}, {"number": 210, "row": 15, "col": 11, "row2": 15, "col2": 11}, {"number": 174, "row": 15, "col": 13, "row2": 15, "col2": 13}, {"number": 175, "row": 15, "col": 14, "row2": 15, "col2": 14}, {"number": 176, "row": 15, "col": 15, "row2": 15, "col2": 15}, {"number": 177, "row": 15, "col": 16, "row2": 15, "col2": 16}, {"number": 178, "row": 15, "col": 17, "row2": 15, "col2": 17}, {"number": 179, "row": 15, "col": 18, "row2": 15, "col2": 18}, {"number": 180, "row": 15, "col": 19, "row2": 15, "col2": 19}, {"number": 181, "row": 15, "col": 20, "row2": 15, "col2": 20}, {"number": 182, "row": 15, "col": 21, "row2": 15, "col2": 21}, {"number": 183, "row": 15, "col": 22, "row2": 15, "col2": 22}, {"number": 184, "row": 15, "col": 23, "row2": 15, "col2": 23}, {"number": 185, "row": 15, "col": 24, "row2": 15, "col2": 24}, {"number": 186, "row": 15, "col": 25, "row2": 15, "col2": 25}, {"number": 187, "row": 15, "col": 26, "row2": 15, "col2": 26}, {"number": 188, "row": 15, "col": 27, "row2": 15, "col2": 27}, {"number": 189, "row": 15, "col": 28, "row2": 15, "col2": 28}, {"number": 190, "row": 15, "col": 29, "row2": 15, "col2": 29}, {"number": 191, "row": 15, "col": 30, "row2": 15, "col2": 30}, {"number": 123, "row": 17, "col": 8, "row2": 17, "col2": 8}, {"number": 124, "row": 17, "col": 9, "row2": 17, "col2": 9}, {"number": 125, "row": 17, "col": 10, "row2": 17, "col2": 10}, {"number": 126, "row": 17, "col": 11, "row2": 17, "col2": 11}, {"number": 127, "row": 17, "col": 12, "row2": 17, "col2": 12}, {"number": 128, "row": 17, "col": 13, "row2": 17, "col2": 13}, {"number": 129, "row": 17, "col": 14, "row2": 17, "col2": 14}, {"number": 130, "row": 17, "col": 15, "row2": 17, "col2": 15}, {"number": 131, "row": 17, "col": 16, "row2": 17, "col2": 16}, {"number": 132, "row": 17, "col": 17, "row2": 17, "col2": 17}, {"number": 122, "row": 19, "col": 8, "row2": 19, "col2": 8}, {"number": 121, "row": 19, "col": 9, "row2": 19, "col2": 9}, {"number": 120, "row": 19, "col": 10, "row2": 19, "col2": 10}, {"number": 119, "row": 19, "col": 11, "row2": 19, "col2": 11}, {"number": 118, "row": 19, "col": 12, "row2": 19, "col2": 12}, {"number": 117, "row": 19, "col": 13, "row2": 19, "col2": 13}, {"number": 116, "row": 19, "col": 14, "row2": 19, "col2": 14}, {"number": 115, "row": 19, "col": 15, "row2": 19, "col2": 15}, {"number": 114, "row": 19, "col": 16, "row2": 19, "col2": 16}, {"number": 113, "row": 19, "col": 17, "row2": 19, "col2": 17}, {"number": 97, "row": 21, "col": 2, "row2": 21, "col2": 2}, {"number": 98, "row": 21, "col": 3, "row2": 21, "col2": 3}, {"number": 99, "row": 21, "col": 4, "row2": 21, "col2": 4}, {"number": 100, "row": 21, "col": 5, "row2": 21, "col2": 5}, {"number": 101, "row": 21, "col": 6, "row2": 21, "col2": 6}, {"number": 102, "row": 21, "col": 7, "row2": 21, "col2": 7}, {"number": 103, "row": 21, "col": 8, "row2": 21, "col2": 8}, {"number": 104, "row": 21, "col": 9, "row2": 21, "col2": 9}, {"number": 105, "row": 21, "col": 10, "row2": 21, "col2": 10}, {"number": 106, "row": 21, "col": 11, "row2": 21, "col2": 11}, {"number": 107, "row": 21, "col": 12, "row2": 21, "col2": 12}, {"number": 108, "row": 21, "col": 13, "row2": 21, "col2": 13}, {"number": 109, "row": 21, "col": 14, "row2": 21, "col2": 14}, {"number": 110, "row": 21, "col": 15, "row2": 21, "col2": 15}, {"number": 111, "row": 21, "col": 16, "row2": 21, "col2": 16}, {"number": 112, "row": 21, "col": 17, "row2": 21, "col2": 17}, {"number": 80, "row": 21, "col": 19, "row2": 21, "col2": 19}, {"number": 79, "row": 21, "col": 20, "row2": 21, "col2": 20}, {"number": 78, "row": 21, "col": 21, "row2": 21, "col2": 21}, {"number": 77, "row": 21, "col": 22, "row2": 21, "col2": 22}, {"number": 76, "row": 21, "col": 23, "row2": 21, "col2": 23}, {"number": 75, "row": 21, "col": 24, "row2": 21, "col2": 24}, {"number": 74, "row": 21, "col": 25, "row2": 21, "col2": 25}, {"number": 73, "row": 21, "col": 26, "row2": 21, "col2": 26}, {"number": 72, "row": 21, "col": 27, "row2": 21, "col2": 27}, {"number": 71, "row": 21, "col": 28, "row2": 21, "col2": 28}, {"number": 70, "row": 21, "col": 29, "row2": 21, "col2": 29}, {"number": 69, "row": 21, "col": 30, "row2": 21, "col2": 30}, {"number": 96, "row": 22, "col": 2, "row2": 22, "col2": 2}, {"number": 95, "row": 22, "col": 3, "row2": 22, "col2": 3}, {"number": 94, "row": 22, "col": 4, "row2": 22, "col2": 4}, {"number": 93, "row": 22, "col": 5, "row2": 22, "col2": 5}, {"number": 92, "row": 22, "col": 6, "row2": 22, "col2": 6}, {"number": 91, "row": 22, "col": 7, "row2": 22, "col2": 7}, {"number": 90, "row": 22, "col": 8, "row2": 22, "col2": 8}, {"number": 89, "row": 22, "col": 9, "row2": 22, "col2": 9}, {"number": 88, "row": 22, "col": 10, "row2": 22, "col2": 10}, {"number": 87, "row": 22, "col": 11, "row2": 22, "col2": 11}, {"number": 86, "row": 22, "col": 12, "row2": 22, "col2": 12}, {"number": 85, "row": 22, "col": 13, "row2": 22, "col2": 13}, {"number": 84, "row": 22, "col": 14, "row2": 22, "col2": 14}, {"number": 83, "row": 22, "col": 15, "row2": 22, "col2": 15}, {"number": 82, "row": 22, "col": 16, "row2": 22, "col2": 16}, {"number": 81, "row": 22, "col": 17, "row2": 22, "col2": 17}, {"number": 57, "row": 22, "col": 19, "row2": 22, "col2": 19}, {"number": 58, "row": 22, "col": 20, "row2": 22, "col2": 20}, {"number": 59, "row": 22, "col": 21, "row2": 22, "col2": 21}, {"number": 60, "row": 22, "col": 22, "row2": 22, "col2": 22}, {"number": 61, "row": 22, "col": 23, "row2": 22, "col2": 23}, {"number": 62, "row": 22, "col": 24, "row2": 22, "col2": 24}, {"number": 63, "row": 22, "col": 25, "row2": 22, "col2": 25}, {"number": 64, "row": 22, "col": 26, "row2": 22, "col2": 26}, {"number": 65, "row": 22, "col": 27, "row2": 22, "col2": 27}, {"number": 66, "row": 22, "col": 28, "row2": 22, "col2": 28}, {"number": 67, "row": 22, "col": 29, "row2": 22, "col2": 29}, {"number": 68, "row": 22, "col": 30, "row2": 22, "col2": 30}, {"number": 32, "row": 24, "col": 2, "row2": 24, "col2": 2}, {"number": 31, "row": 24, "col": 3, "row2": 24, "col2": 3}, {"number": 30, "row": 24, "col": 4, "row2": 24, "col2": 4}, {"number": 29, "row": 24, "col": 5, "row2": 24, "col2": 5}, {"number": 28, "row": 24, "col": 6, "row2": 24, "col2": 6}, {"number": 27, "row": 24, "col": 7, "row2": 24, "col2": 7}, {"number": 26, "row": 24, "col": 8, "row2": 24, "col2": 8}, {"number": 25, "row": 24, "col": 9, "row2": 24, "col2": 9}, {"number": 24, "row": 24, "col": 10, "row2": 24, "col2": 10}, {"number": 23, "row": 24, "col": 11, "row2": 24, "col2": 11}, {"number": 22, "row": 24, "col": 12, "row2": 24, "col2": 12}, {"number": 21, "row": 24, "col": 13, "row2": 24, "col2": 13}, {"number": 20, "row": 24, "col": 14, "row2": 24, "col2": 14}, {"number": 19, "row": 24, "col": 15, "row2": 24, "col2": 15}, {"number": 18, "row": 24, "col": 16, "row2": 24, "col2": 16}, {"number": 17, "row": 24, "col": 17, "row2": 24, "col2": 17}, {"number": 56, "row": 24, "col": 19, "row2": 24, "col2": 19}, {"number": 55, "row": 24, "col": 20, "row2": 24, "col2": 20}, {"number": 54, "row": 24, "col": 21, "row2": 24, "col2": 21}, {"number": 53, "row": 24, "col": 22, "row2": 24, "col2": 22}, {"number": 52, "row": 24, "col": 23, "row2": 24, "col2": 23}, {"number": 51, "row": 24, "col": 24, "row2": 24, "col2": 24}, {"number": 50, "row": 24, "col": 25, "row2": 24, "col2": 25}, {"number": 49, "row": 24, "col": 26, "row2": 24, "col2": 26}, {"number": 48, "row": 24, "col": 27, "row2": 24, "col2": 27}, {"number": 47, "row": 24, "col": 28, "row2": 24, "col2": 28}, {"number": 46, "row": 24, "col": 29, "row2": 24, "col2": 29}, {"number": 45, "row": 24, "col": 30, "row2": 24, "col2": 30}, {"number": 1, "row": 25, "col": 2, "row2": 25, "col2": 2}, {"number": 2, "row": 25, "col": 3, "row2": 25, "col2": 3}, {"number": 3, "row": 25, "col": 4, "row2": 25, "col2": 4}, {"number": 4, "row": 25, "col": 5, "row2": 25, "col2": 5}, {"number": 5, "row": 25, "col": 6, "row2": 25, "col2": 6}, {"number": 6, "row": 25, "col": 7, "row2": 25, "col2": 7}, {"number": 7, "row": 25, "col": 8, "row2": 25, "col2": 8}, {"number": 8, "row": 25, "col": 9, "row2": 25, "col2": 9}, {"number": 9, "row": 25, "col": 10, "row2": 25, "col2": 10}, {"number": 10, "row": 25, "col": 11, "row2": 25, "col2": 11}, {"number": 11, "row": 25, "col": 12, "row2": 25, "col2": 12}, {"number": 12, "row": 25, "col": 13, "row2": 25, "col2": 13}, {"number": 13, "row": 25, "col": 14, "row2": 25, "col2": 14}, {"number": 14, "row": 25, "col": 15, "row2": 25, "col2": 15}, {"number": 15, "row": 25, "col": 16, "row2": 25, "col2": 16}, {"number": 16, "row": 25, "col": 17, "row2": 25, "col2": 17}, {"number": 33, "row": 25, "col": 19, "row2": 25, "col2": 19}, {"number": 34, "row": 25, "col": 20, "row2": 25, "col2": 20}, {"number": 35, "row": 25, "col": 21, "row2": 25, "col2": 21}, {"number": 36, "row": 25, "col": 22, "row2": 25, "col2": 22}, {"number": 37, "row": 25, "col": 23, "row2": 25, "col2": 23}, {"number": 38, "row": 25, "col": 24, "row2": 25, "col2": 24}, {"number": 39, "row": 25, "col": 25, "row2": 25, "col2": 25}, {"number": 40, "row": 25, "col": 26, "row2": 25, "col2": 26}, {"number": 41, "row": 25, "col": 27, "row2": 25, "col2": 27}, {"number": 42, "row": 25, "col": 28, "row2": 25, "col2": 28}, {"number": 43, "row": 25, "col": 29, "row2": 25, "col2": 29}, {"number": 44, "row": 25, "col": 30, "row2": 25, "col2": 30}], ROADS=[{"name": "RUA 04", "key": "RUA 04", "variant": false, "road_key": "RUA_04", "row": 0, "col": 31, "row2": 26, "col2": 31, "parts": [{"row": 0, "col": 31, "row2": 26, "col2": 31}]}, {"name": "RUA 25", "key": "RUA 25", "variant": false, "road_key": "RUA_25", "row": 1, "col": 11, "row2": 1, "col2": 30, "parts": [{"row": 1, "col": 11, "row2": 1, "col2": 30}]}, {"name": "RUA", "key": "RUA", "variant": false, "road_key": "RUA", "row": 2, "col": 7, "row2": 19, "col2": 11, "parts": [{"row": 2, "col": 11, "row2": 3, "col2": 11}, {"row": 17, "col": 7, "row2": 19, "col2": 7}]}, {"name": "RUA 20", "key": "RUA 20", "variant": false, "road_key": "RUA_20", "row": 4, "col": 0, "row2": 6, "col2": 0, "parts": [{"row": 4, "col": 0, "row2": 6, "col2": 0}]}, {"name": "RUA 32", "key": "RUA 32", "variant": false, "road_key": "RUA_32", "row": 4, "col": 1, "row2": 4, "col2": 17, "parts": [{"row": 4, "col": 1, "row2": 4, "col2": 17}]}, {"name": "RUA 21", "key": "RUA 21", "variant": false, "road_key": "RUA_21", "row": 4, "col": 18, "row2": 9, "col2": 18, "parts": [{"row": 4, "col": 18, "row2": 9, "col2": 18}]}, {"name": "RUA 24", "key": "RUA 24", "variant": false, "road_key": "RUA_24", "row": 4, "col": 19, "row2": 4, "col2": 30, "parts": [{"row": 4, "col": 19, "row2": 4, "col2": 30}]}, {"name": "RUA 19", "key": "RUA 19", "variant": false, "road_key": "RUA_19", "row": 7, "col": 0, "row2": 7, "col2": 11, "parts": [{"row": 7, "col": 0, "row2": 7, "col2": 11}]}, {"name": "RUA 12", "key": "RUA 12", "variant": false, "road_key": "RUA_12", "row": 7, "col": 12, "row2": 15, "col2": 12, "parts": [{"row": 7, "col": 12, "row2": 15, "col2": 12}]}, {"name": "RUA 22", "key": "RUA 22", "variant": false, "road_key": "RUA_22", "row": 7, "col": 13, "row2": 7, "col2": 17, "parts": [{"row": 7, "col": 13, "row2": 7, "col2": 17}]}, {"name": "RUA 23", "key": "RUA 23", "variant": false, "road_key": "RUA_23", "row": 7, "col": 19, "row2": 7, "col2": 30, "parts": [{"row": 7, "col": 19, "row2": 7, "col2": 30}]}, {"name": "RUA 18", "key": "RUA 18", "variant": false, "road_key": "RUA_18", "row": 10, "col": 0, "row2": 16, "col2": 1, "parts": [{"row": 10, "col": 0, "row2": 16, "col2": 1}]}, {"name": "RUA 16", "key": "RUA 16", "variant": false, "road_key": "RUA_16", "row": 10, "col": 2, "row2": 10, "col2": 11, "parts": [{"row": 10, "col": 2, "row2": 10, "col2": 11}]}, {"name": "RUA 15", "key": "RUA 15", "variant": false, "road_key": "RUA_15", "row": 10, "col": 13, "row2": 10, "col2": 30, "parts": [{"row": 10, "col": 13, "row2": 10, "col2": 30}]}, {"name": "RUA 17", "key": "RUA 17", "variant": false, "road_key": "RUA_17", "row": 13, "col": 2, "row2": 13, "col2": 11, "parts": [{"row": 13, "col": 2, "row2": 13, "col2": 11}]}, {"name": "RUA 13", "key": "RUA 13", "variant": false, "road_key": "RUA_13", "row": 13, "col": 13, "row2": 13, "col2": 30, "parts": [{"row": 13, "col": 13, "row2": 13, "col2": 30}]}, {"name": "RUA 11", "key": "RUA 11", "variant": false, "road_key": "RUA_11", "row": 16, "col": 2, "row2": 16, "col2": 17, "parts": [{"row": 16, "col": 2, "row2": 16, "col2": 17}]}, {"name": "RUA 10", "key": "RUA 10", "variant": false, "road_key": "RUA_10", "row": 16, "col": 18, "row2": 26, "col2": 18, "parts": [{"row": 16, "col": 18, "row2": 26, "col2": 18}]}, {"name": "RUA 09", "key": "RUA 09", "variant": false, "road_key": "RUA_09", "row": 16, "col": 19, "row2": 16, "col2": 30, "parts": [{"row": 16, "col": 19, "row2": 16, "col2": 30}]}, {"name": "RUA SAIDA", "key": "RUA SAIDA", "variant": false, "road_key": "RUA_SAIDA", "row": 18, "col": 0, "row2": 19, "col2": 2, "parts": [{"row": 18, "col": 0, "row2": 18, "col2": 2}, {"row": 19, "col": 2, "row2": 19, "col2": 2}]}, {"name": "PORTARIA", "key": "PORTARIA", "variant": false, "road_key": "PORTARIA", "row": 19, "col": 0, "row2": 19, "col2": 1, "parts": [{"row": 19, "col": 0, "row2": 19, "col2": 1}]}, {"name": "ENTRADA", "key": "ENTRADA", "variant": false, "road_key": "ENTRADA", "row": 20, "col": 0, "row2": 20, "col2": 2, "parts": [{"row": 20, "col": 0, "row2": 20, "col2": 2}]}, {"name": "RUA 07", "key": "RUA 07", "variant": false, "road_key": "RUA_07", "row": 20, "col": 3, "row2": 20, "col2": 17, "parts": [{"row": 20, "col": 3, "row2": 20, "col2": 17}]}, {"name": "RUA 08", "key": "RUA 08", "variant": false, "road_key": "RUA_08", "row": 20, "col": 19, "row2": 20, "col2": 30, "parts": [{"row": 20, "col": 19, "row2": 20, "col2": 30}]}, {"name": "RUA 01", "key": "RUA 01", "variant": false, "road_key": "RUA_01", "row": 21, "col": 0, "row2": 26, "col2": 1, "parts": [{"row": 21, "col": 0, "row2": 26, "col2": 1}]}, {"name": "RUA 06", "key": "RUA 06", "variant": false, "road_key": "RUA_06", "row": 23, "col": 2, "row2": 23, "col2": 17, "parts": [{"row": 23, "col": 2, "row2": 23, "col2": 17}]}, {"name": "RUA 05", "key": "RUA 05", "variant": false, "road_key": "RUA_05", "row": 23, "col": 19, "row2": 23, "col2": 30, "parts": [{"row": 23, "col": 19, "row2": 23, "col2": 30}]}, {"name": "RUA 02", "key": "RUA 02", "variant": false, "road_key": "RUA_02", "row": 26, "col": 2, "row2": 26, "col2": 17, "parts": [{"row": 26, "col": 2, "row2": 26, "col2": 17}]}, {"name": "RUA 03", "key": "RUA 03", "variant": false, "road_key": "RUA_03", "row": 26, "col": 19, "row2": 26, "col2": 30, "parts": [{"row": 26, "col": 19, "row2": 26, "col2": 30}]}], LASERS=[{"name": "AREA DE LASER 05", "key": "AREA DE LASER 05", "variant": false, "road_key": "AREA_DE_LASER_05", "row": 0, "col": 0, "row2": 3, "col2": 10, "parts": [{"row": 0, "col": 0, "row2": 3, "col2": 10}]}, {"name": "AREA DE LASER 04", "key": "AREA DE LASER 04", "variant": false, "road_key": "AREA_DE_LASER_04", "row": 8, "col": 13, "row2": 9, "col2": 17, "parts": [{"row": 8, "col": 13, "row2": 9, "col2": 17}]}, {"name": "AREA DE LAZER 01", "key": "AREA DE LASER 01", "variant": true, "road_key": "AREA_DE_LAZER_01", "row": 17, "col": 0, "row2": 19, "col2": 6, "parts": [{"row": 17, "col": 0, "row2": 17, "col2": 6}, {"row": 18, "col": 3, "row2": 19, "col2": 6}]}, {"name": "AREA DE LASER 02", "key": "AREA DE LASER 02", "variant": false, "road_key": "AREA_DE_LASER_02", "row": 17, "col": 19, "row2": 19, "col2": 30, "parts": [{"row": 17, "col": 19, "row2": 19, "col2": 30}]}, {"name": "AREA DE LASER 03", "key": "AREA DE LASER 03", "variant": false, "road_key": "AREA_DE_LASER_03", "row": 23, "col": 32, "row2": 26, "col2": 32, "parts": [{"row": 23, "col": 32, "row2": 26, "col2": 32}]}], MARKER={"row": 0, "col": 32, "row2": 22, "col2": 32},
+      PORTARIA={"row": 19, "col": 0, "row2": 19, "col2": 1}, ENTRADA={"name": "ENTRADA", "key": "ENTRADA", "variant": false, "parts": [{"row": 20, "col": 0, "row2": 20, "col2": 2}], "row": 20, "col": 0, "row2": 20, "col2": 2}, ADMIN_HASH="e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      INITIAL_BLOCKED=[];
+const COLS=33, ROWS=27;
+
+// ---------- Geometria: cada celula do Excel vira um retangulo no SVG ----------
+const CELL_W=100, CELL_H=60, OX=60, OY=60;
+// Tamanho total do mapa: no minimo 3500x1750 (como antes), maior se a planilha pedir
+const MAP_W=Math.max(3500, OX*2+COLS*CELL_W), MAP_H=Math.max(1750, OY*2+ROWS*CELL_H);
+const colX=c=>OX+c*CELL_W, rowY=r=>OY+r*CELL_H;
+
+// ---------- Atalhos de elementos ----------
+const svg=$('#map'), view=$('#view');
+const plantG=$('#plantBase'), roadsG=$('#roads'), lasersG=$('#lasers'),
+      housesG=$('#houses'), portariaG=$('#portaria'), routeG=$('#route');
+const statusEl=$('#status'), detailsEl=$('#details'), blockedList=$('#blockedList');
+
+// Modo de inspeção de coordenadas SVG ao clicar (ativo no modo Admin).
+// Este listener precisa ser instalado depois que `svg` e `statusEl` existem.
+svg.addEventListener('click', e => {
+  if (adminUnlocked) {
+    const pt = toSvg(e.clientX, e.clientY);
+    console.log(`Coordenada SVG -> x: ${Math.round(pt.x)}, y: ${Math.round(pt.y)}`);
+    statusEl.textContent = `Coordenada SVG: x=${Math.round(pt.x)}, y=${Math.round(pt.y)}`;
+  }
+});
+
+svg.setAttribute('viewBox',`0 0 ${MAP_W} ${MAP_H}`);
+$('#bg').setAttribute('width',MAP_W); $('#bg').setAttribute('height',MAP_H);
+
+// Cria um elemento SVG ja anexado ao pai
+const el=(tag,a,p)=>{const e=document.createElementNS('http://www.w3.org/2000/svg',tag);for(const k in a)e.setAttribute(k,a[k]);p.appendChild(e);return e};
+const parts=x=>x.parts||[x];                       // uma rua pode ter varios trechos
+const isSmallScreen=()=>window.matchMedia('(max-width:800px)').matches;
+
+// ================================================================
+// ARMAZENAMENTO LOCAL (try/catch: no modo privado do iPhone pode dar erro)
+// ================================================================
+const store={
+  get(){try{return JSON.parse(localStorage.getItem('condominio_bloqueios')||'[]')}catch{return[]}},
+  set(v){try{localStorage.setItem('condominio_bloqueios',JSON.stringify(v))}catch{}}
+};
+
+// ================================================================
+// SUPABASE (so existe se URL e chave foram informadas no Python)
+// ================================================================
+const REMOTE_BLOCKS=Boolean(SUPABASE_URL&&SUPABASE_KEY&&window.supabase);
+const sb=REMOTE_BLOCKS?window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY):null;
+$('#storageInfo').textContent=REMOTE_BLOCKS?'Bloqueios gerenciados pelo Supabase.':'Bloqueios salvos somente neste navegador.';
+
+function supabaseErrorText(error){
+  if(!error)return 'erro desconhecido';
+  return [error.message,error.code?`código ${error.code}`:'',error.details,error.hint]
+    .filter(Boolean).join(' — ');
+}
+
+// ================================================================
+// BLOQUEIOS DAS RUAS
+// A chave da rua vem do nome na planilha; todos os trechos da mesma rua
+// compartilham a mesma chave, entao bloqueiam juntos.
+// ================================================================
+function canonicalRoadKey(item){
+  const raw=typeof item==='string'?item:(item?.road_key||'');
+  const name=typeof item==='object'?(item?.road_name||''):'';
+  let r=ROADS.find(x=>x.road_key===raw);
+  if(r)return r.road_key;
+  if(name){r=ROADS.find(x=>x.name===name);if(r)return r.road_key;}
+  return raw;
+}
+const embeddedBlocked=new Set((Array.isArray(INITIAL_BLOCKED)?INITIAL_BLOCKED:[]).map(canonicalRoadKey).filter(Boolean));
+let blocked=new Set([...embeddedBlocked,...store.get().map(canonicalRoadKey).filter(Boolean)]);
+let selectedHouse=null, currentUser=null, adminUnlocked=false;
+
+// ================================================================
+// GRADE DE CELULAS (cache) -> deixa o calculo da rota MUITO mais rapido
+// Antes, cada teste "pode andar aqui?" varria todas as ruas/lasers/casas.
+// Agora montamos a grade uma vez e a consulta e instantanea.
+// ================================================================
+const idx=(r,c)=>r*COLS+c;
+const STATIC_OK=new Uint8Array(ROWS*COLS);   // 1 = rua livre de laser/casa
+let BLOCKED_CELLS=new Uint8Array(ROWS*COLS); // 1 = celula de rua bloqueada
+
+function eachCell(a,fn){
+  for(let r=Math.max(0,a.row);r<=Math.min(ROWS-1,a.row2);r++)
+    for(let c=Math.max(0,a.col);c<=Math.min(COLS-1,a.col2);c++)fn(r,c);
+}
+(function buildStaticGrid(){
+  for(const road of ROADS)for(const p of parts(road))eachCell(p,(r,c)=>{STATIC_OK[idx(r,c)]=1});   // ruas andaveis
+  for(const l of LASERS)for(const p of parts(l))eachCell(p,(r,c)=>{STATIC_OK[idx(r,c)]=0});         // laser nao anda
+  for(const h of HOUSES){if(h.row<ROWS&&h.col<COLS)STATIC_OK[idx(h.row,h.col)]=0}                  // celula da casa nao anda
+})();
+// Recalcula as celulas bloqueadas (chamado sempre que o conjunto "blocked" muda)
+function rebuildBlockedCells(){
+  BLOCKED_CELLS=new Uint8Array(ROWS*COLS);
+  for(const r of ROADS)if(blocked.has(r.road_key||r.name))for(const p of parts(r))eachCell(p,(y,x)=>{BLOCKED_CELLS[idx(y,x)]=1});
+}
+// ignoreBlocked=true so serve para calcular a rota alternativa (laranja)
+function walkable(r,c,ignoreBlocked=false){
+  if(r<0||r>=ROWS||c<0||c>=COLS)return false;
+  const i=idx(r,c);
+  return STATIC_OK[i]===1&&(ignoreBlocked||BLOCKED_CELLS[i]===0);
+}
+
+// ================================================================
+// DESENHO
+// ================================================================
+function areaRect(a){return{x:colX(a.col)+7,y:rowY(a.row)+7,w:(a.col2-a.col+1)*CELL_W-14,h:(a.row2-a.row+1)*CELL_H-14}}
+
+// Linhas da grade: nunca mudam, entao desenhamos so uma vez
+function drawBase(){
+  for(let r=0;r<=ROWS;r++)el('line',{x1:OX,y1:rowY(r),x2:OX+COLS*CELL_W,y2:rowY(r),stroke:'#173044','stroke-width':1},plantG);
+  for(let c=0;c<=COLS;c++)el('line',{x1:colX(c),y1:OY,x2:colX(c),y2:OY+ROWS*CELL_H,stroke:'#173044','stroke-width':1},plantG);
+}
+
+function draw(){
+  rebuildBlockedCells();
+  roadsG.innerHTML='';lasersG.innerHTML='';housesG.innerHTML='';portariaG.innerHTML='';
+
+  // ---- Ruas ----
+  for(const r of ROADS){
+    const g=el('g',{'data-road-key':r.road_key||r.name},roadsG);
+    for(const part of parts(r)){
+      const q=areaRect(part), horizontal=q.w>=q.h;
+      // a "pista" tem 30 de largura, centralizada no trecho
+      const lane=horizontal?{x:q.x,y:q.y+q.h/2-15,width:q.w,height:30}:{x:q.x+q.w/2-15,y:q.y,width:30,height:q.h};
+      const isExit=/SAIDA/.test(r.name), isEntry=/ENTRADA/.test(r.name);
+      const rect=el('rect',{...lane,rx:8,class:`road ${isExit?'exit':''} ${isEntry?'entry':''}`},g);
+      rect.dataset.road=r.road_key||r.name;
+      if(isExit&&part===parts(r)[0]){
+        const label=el('text',{x:q.x+q.w/2,y:q.y+q.h/2+6,'text-anchor':'middle',fill:'#f8df9c','font-size':18,'font-weight':800},g);
+        label.textContent='SAÍDA';
+      }
+      if(blocked.has(rect.dataset.road))rect.classList.add('blocked');
+    }
+    if(!/SAIDA|ENTRADA|PORTARIA/.test(r.name)){
+      const q=areaRect(r);
+      const label=el('text',{x:q.x+q.w/2,y:q.y+q.h/2+5,'text-anchor':'middle',class:'roadLabel'},g);
+      label.textContent=r.name;
+    }
+    // So o administrador bloqueia/libera. Visitante tocando na rua nao recebe mais alerta.
+    g.addEventListener('click',()=>{if(adminUnlocked)toggleRoad(r)});
+  }
+
+  // ---- Areas laser ----
+  for(const a of LASERS)for(const part of parts(a)){
+    const q=areaRect(part);
+    el('rect',{x:q.x,y:q.y,width:q.w,height:q.h,rx:5,class:`laser ${a.variant?'typo':''}`},lasersG);
+  }
+
+  // ---- Portaria ----
+  const pq=areaRect(PORTARIA);
+  el('rect',{x:pq.x-10,y:pq.y-10,width:pq.w+20,height:pq.h+20,rx:14,fill:'#214b3d',stroke:'#62c995','stroke-width':4},portariaG);
+  const pt=el('text',{x:pq.x+pq.w/2,y:pq.y+pq.h/2+6,'text-anchor':'middle',fill:'#d9f7ef','font-size':17,'font-weight':'700'},portariaG);
+  pt.textContent='CONDOMÍNIO';
+
+  // ---- Casas ----
+  // Casas "especiais" (133 a 173) dividem uma unica celula grande da planilha em 41 faixas.
+  const list=[...HOUSES];
+  if(MARKER)for(let n=173;n>=133;n--)list.push({number:n,row:MARKER.row,col:MARKER.col,special:true});
+  for(const h of list){
+    const spanCols=(h.col2??h.col)-h.col+1, spanRows=(h.row2??h.row)-h.row+1;
+    let x=colX(h.col)+8, y=rowY(h.row)+8, w=spanCols*CELL_W-16, hh=spanRows*CELL_H-16;
+    if(h.special){
+      const y0=rowY(MARKER.row), slots=(rowY(MARKER.row2+1)-y0)/41;
+      w=72; hh=slots-6; x=colX(h.col)+14; y=y0+(173-h.number)*slots+(slots-hh)/2;
+    }
+    const g=el('g',{class:`house ${selectedHouse===h.number?'selected':''}`},housesG);
+    el('rect',{x,y,width:w,height:hh,rx:5,fill:'#1b3d4e',stroke:'#63c6bd','stroke-width':1.5},g);
+    const t=el('text',{x:x+w/2,y:y+hh/2+5,'text-anchor':'middle',fill:'#d7f6f2','font-size':Math.max(8,Math.min(16,w*.38)),'font-weight':'700'},g);
+    t.textContent=h.number;
+    g.addEventListener('click',()=>selectHouse(h.number,{focus:true}));
+  }
+  updateBlocked();
+}
+
+// ================================================================
+// ROTA: A* (algoritmo de menor caminho) com penalidade para curvas
+// ================================================================
+
+// Fila de prioridade (heap binario). Antes usava array.sort() a cada passo = lento.
+class MinHeap{
+  constructor(){this.a=[]}
+  get size(){return this.a.length}
+  push(n){const a=this.a;a.push(n);let i=a.length-1;
+    while(i>0){const p=(i-1)>>1;if(a[p].f<=a[i].f)break;[a[p],a[i]]=[a[i],a[p]];i=p}}
+  pop(){const a=this.a,top=a[0],last=a.pop();
+    if(a.length){a[0]=last;let i=0;
+      for(;;){let l=2*i+1,r=l+1,m=i;
+        if(l<a.length&&a[l].f<a[m].f)m=l;
+        if(r<a.length&&a[r].f<a[m].f)m=r;
+        if(m===i)break;[a[m],a[i]]=[a[i],a[m]];i=m}}
+    return top}
+}
+
+function astar(start,goal,ignoreBlocked=false){
+  const dirs=[[1,0],[-1,0],[0,1],[0,-1]];
+  // o "estado" combina celula + direcao (para poder penalizar curvas)
+  const stateKey=(r,c,d)=>((r*COLS+c)*5)+(d===4?0:d+1);
+  const open=new MinHeap(), came=new Map(), g=new Map([[stateKey(start.r,start.c,4),0]]), closed=new Set();
+  open.push({r:start.r,c:start.c,d:4,f:0});
+  while(open.size){
+    const cur=open.pop(), sk=stateKey(cur.r,cur.c,cur.d);
+    if(closed.has(sk))continue;
+    closed.add(sk);
+    if(cur.r===goal.r&&cur.c===goal.c){            // chegou: reconstroi o caminho de tras para frente
+      const p=[];let st=sk;
+      while(st!=null){const cell=Math.floor(st/5);p.push({r:Math.floor(cell/COLS),c:cell%COLS});st=came.get(st)}
+      return p.reverse();
+    }
+    for(let nd=0;nd<4;nd++){
+      const r=cur.r+dirs[nd][0], c=cur.c+dirs[nd][1];
+      if(!walkable(r,c,ignoreBlocked))continue;
+      const nk=stateKey(r,c,nd), turn=(cur.d!==4&&cur.d!==nd)?18:0, ng=g.get(sk)+1+turn;   // curva custa 18
+      if(ng<(g.get(nk)??Infinity)){
+        g.set(nk,ng);came.set(nk,sk);
+        open.push({r,c,d:nd,f:ng+Math.abs(r-goal.r)+Math.abs(c-goal.c)});
+      }
+    }
+  }
+  return null;                                      // nao existe caminho
+}
+
+// Ponto central da "pista" de uma celula (para a linha da rota ficar no meio da rua)
+function lanePoint(p){
+  const road=ROADS.find(x=>parts(x).some(a=>p.r>=a.row&&p.r<=a.row2&&p.c>=a.col&&p.c<=a.col2));
+  const part=road?.parts?.find(a=>p.r>=a.row&&p.r<=a.row2&&p.c>=a.col&&p.c<=a.col2);
+  if(!part)return{x:colX(p.c)+CELL_W/2,y:rowY(p.r)+CELL_H/2};
+  const q=areaRect(part), horizontal=q.w>=q.h;
+  return horizontal?{x:colX(p.c)+CELL_W/2,y:q.y+q.h/2}:{x:q.x+q.w/2,y:rowY(p.r)+CELL_H/2};
+}
+
+// Celulas de rua de onde se acessa a casa (frente = acima/abaixo; lateral = esquerda/direita)
+function houseAccessCandidates(h,targetRow,ignoreBlocked=false){
+  const front=[{r:targetRow-1,c:h.col,kind:'front'},{r:targetRow+1,c:h.col,kind:'front'}].filter(p=>walkable(p.r,p.c,ignoreBlocked));
+  const lateral=[h.col-1,h.col+1].map(c=>({r:targetRow,c,kind:'lateral'})).filter(p=>walkable(p.r,p.c,ignoreBlocked));
+  return [...front,...lateral];
+}
+
+// Escolhe o menor caminho entre os pontos de acesso possiveis da casa
+function bestPath(h,targetRow,start,ignoreBlocked){
+  const cands=h.special?[{r:targetRow,c:MARKER.col-1,kind:'vertical-street'}]:houseAccessCandidates(h,targetRow,ignoreBlocked);
+  const front=cands.filter(x=>x.kind==='front'||x.kind==='vertical-street');
+  const goals=front.length?front:cands;             // prefere a frente; se nao houver, usa a lateral
+  let best=null;
+  for(const goal of goals){const t=astar(start,goal,ignoreBlocked);if(t&&(!best||t.length<best.length))best=t}
+  return best;
+}
+
+// Desenha a rota. Amarela = normal. Laranja = alternativa que passa por bloqueio.
+function renderRoute(path,n,isFallback,focus){
+  routeG.innerHTML='';
+  // Converte celulas em pontos (x,y); entre dois pontos nao alinhados, cria um canto em "L"
+  const centers=path.map(lanePoint), pts=[];
+  centers.forEach((q,i)=>{
+    const prev=centers[i-1];
+    if(prev&&q.x!==prev.x&&q.y!==prev.y)pts.push([q.x,prev.y]);
+    pts.push([q.x,q.y]);
+  });
+  if(ENTRADA)pts.unshift([colX(ENTRADA.col),rowY(ENTRADA.row)+30]);   // comeca na boca da entrada
+
+  const polyPts=pts.map(p=>p.join(',')).join(' ');
+  const pathD=pts.map((p,i)=>`${i?'L':'M'} ${p[0]} ${p[1]}`).join(' ');
+  el('polyline',{points:polyPts,class:isFallback?'routeFallbackGlow':'routeGlow'},routeG);
+  el('polyline',{points:polyPts,class:isFallback?'routeFallback':'route','marker-end':isFallback?'url(#arrowBlocked)':'url(#arrow)'},routeG);
+
+  // Bolinha animada percorrendo a rota
+  const ball=el('circle',{cx:0,cy:0,r:10,class:`routeBall ${isFallback?'fallback':''}`},routeG);
+  el('animateMotion',{path:pathD,dur:`${Math.max(3,Math.min(14,pts.length*.16))}s`,repeatCount:'indefinite',rotate:'auto'},ball);
+  // Marcadores de inicio (verde) e destino (vermelho/laranja)
+  const first=pts[0], last=pts[pts.length-1];
+  el('circle',{cx:first[0],cy:first[1],r:7,fill:'#39e58c',stroke:'#d8ffe8','stroke-width':2},routeG);
+  el('circle',{cx:last[0],cy:last[1],r:6,fill:isFallback?'#d9793b':'#c95f5a',stroke:'#fff0f0','stroke-width':2},routeG);
+
+  // Conta curvas para o resumo
+  let turns=0;
+  for(let i=2;i<path.length;i++)if(path[i].r-path[i-1].r!==path[i-1].r-path[i-2].r||path[i].c-path[i-1].c!==path[i-1].c-path[i-2].c)turns++;
+  if(isFallback){
+    statusEl.innerHTML='<span style="color:#d9793b">Rota normal indisponível — alternativa em tom dourado</span>';
+    detailsEl.textContent=`Casa ${n}: a rota livre está bloqueada. Alternativa mais próxima em tom dourado (${path.length-1} células, ${turns} curvas).`;
+  }else{
+    statusEl.innerHTML='<span class="ok">Rota encontrada</span>';
+    detailsEl.textContent=`ENTRADA → Casa ${n} (${path.length-1} células, ${turns} curvas)`;
+  }
+
+  // NO CELULAR: aproxima automaticamente na rota (o mapa inteiro fica minusculo na tela pequena)
+  if(focus&&isSmallScreen()){
+    const xs=pts.map(p=>p[0]), ys=pts.map(p=>p[1]);
+    focusBox({x1:Math.min(...xs),y1:Math.min(...ys),x2:Math.max(...xs),y2:Math.max(...ys)});
+  }
+}
+
+// opts.focus=false evita mexer no zoom (ex.: quando a rota e recalculada por mudanca de bloqueio)
+function selectHouse(n,opts={}){
+  const specialH=MARKER?[...Array(41)].map((_,i)=>({number:173-i,row:MARKER.row,col:MARKER.col,special:true})):[];
+  const h=[...HOUSES,...specialH].find(x=>x.number===n);
+  if(!h){statusEl.textContent='Casa não encontrada.';return}
+  selectedHouse=n;draw();
+  const targetRow=h.special?Math.min(MARKER.row2,MARKER.row+Math.floor((173-n)*((MARKER.row2-MARKER.row+1)/41))):h.row;
+  const start={r:ENTRADA?ENTRADA.row:PORTARIA.row,c:ENTRADA?ENTRADA.col:PORTARIA.col};
+
+  let path=bestPath(h,targetRow,start,false);                       // 1) rota respeitando bloqueios
+  if(path){renderRoute(path,n,false,opts.focus);return}
+  const fallback=bestPath(h,targetRow,start,true);                  // 2) alternativa ignorando bloqueios
+  if(fallback){renderRoute(fallback,n,true,opts.focus);return}
+  routeG.innerHTML='';
+  statusEl.textContent='Nenhuma rota disponível.';
+  detailsEl.textContent=`Casa ${n}: não foi encontrada uma rota, nem mesmo pela alternativa mais próxima.`;
+}
+
+// ================================================================
+// BLOQUEIOS: leitura/gravacao
+// ================================================================
+async function loadRemoteBlocks(force=false){
+  if(!sb)return;
+  const {data,error}=await sb.from('blocked_roads').select('road_key,road_name').eq('blocked',true);
+  if(error){
+    $('#storageInfo').textContent='Erro ao consultar bloqueios: '+supabaseErrorText(error);
+    return;
+  }
+  $('#storageInfo').textContent=adminUnlocked?'Supabase conectado — modo administrador ativo.':'Bloqueios gerenciados pelo Supabase.';
+  const next=new Set((data||[]).map(canonicalRoadKey).filter(Boolean));
+  // So redesenha se algo mudou. Antes redesenhava a cada 5 s e reiniciava a animacao da rota.
+  const same=next.size===blocked.size&&[...next].every(k=>blocked.has(k));
+  if(same&&!force)return;
+  blocked=next;draw();
+  if(selectedHouse!==null)selectHouse(selectedHouse,{focus:false});
+}
+
+async function toggleRoad(r){
+  if(!adminUnlocked){alert('Acesse Administração e faça login primeiro.');return}
+  const k=r.road_key||r.name, nowBlocked=!blocked.has(k);
+  if(sb){
+    // Confirma a sessão atual antes de tentar INSERT/UPDATE/DELETE.
+    const session=await sb.auth.getUser();
+    if(session.error||!session.data?.user){
+      setAdmin(false);
+      alert('Sua sessão expirou. Entre novamente em Administração.');
+      return;
+    }
+    currentUser=session.data.user;
+    let result;
+    if(nowBlocked){
+      // Verifica se a linha ja existe para decidir entre UPDATE e INSERT
+      const existing=await sb.from('blocked_roads').select('road_key').eq('road_key',k).limit(1);
+      if(existing.error){alert('Não foi possível verificar a rua no Supabase: '+supabaseErrorText(existing.error));return}
+      const row={road_key:k,road_name:r.name,blocked:true,updated_by:currentUser.id,updated_at:new Date().toISOString()};
+      result=existing.data?.length?await sb.from('blocked_roads').update(row).eq('road_key',k):await sb.from('blocked_roads').insert(row);
+    }else{
+      // DELETE pode retornar sucesso mesmo removendo zero linhas. O select()
+      // confirma que a rua realmente foi liberada no banco.
+      result=await sb.from('blocked_roads').delete().eq('road_key',k).select('road_key,road_name');
+      if(!result.error&&!result.data?.length&&r.name!==k){
+        result=await sb.from('blocked_roads').delete().eq('road_name',r.name).select('road_key,road_name');
+      }
+      if(!result.error&&!result.data?.length){
+        await loadRemoteBlocks(true);
+        alert('A rua não foi liberada porque nenhum registro correspondente foi removido no Supabase.\n\nVerifique se road_key e road_name da tabela correspondem à planilha.');
+        return;
+      }
+    }
+    if(result.error){
+      alert('Não foi possível '+(nowBlocked?'bloquear':'liberar')+' a rua no Supabase:\n\n'+supabaseErrorText(result.error)+'\n\nVerifique as políticas RLS da tabela blocked_roads.');
+      return;
+    }
+  }
+  if(sb){
+    // O Supabase é a fonte oficial; evita que o refresh automático de 5 s
+    // desfaça na tela uma alteração que ainda não foi confirmada no banco.
+    await loadRemoteBlocks(true);
+  }else{
+    nowBlocked?blocked.add(k):blocked.delete(k);
+    store.set([...blocked]);
+    draw();
+    if(selectedHouse!==null)selectHouse(selectedHouse,{focus:false});
+  }
+}
+
+// Monta a lista lateral SEM innerHTML/onclick em texto (evita injecao de HTML)
+function updateBlocked(){
+  blockedList.textContent='';
+  if(!blocked.size){blockedList.textContent='Nenhuma rua bloqueada.';return}
+  for(const k of blocked){
+    const r=ROADS.find(x=>(x.road_key||x.name)===k);
+    const row=document.createElement('div');row.className='row';
+    const name=document.createElement('span');name.textContent=r?.name||k;row.appendChild(name);
+    if(adminUnlocked&&r){
+      const b=document.createElement('button');b.className='secondary';b.textContent='Liberar';
+      b.onclick=()=>toggleRoad(r);                 // reaproveita a mesma logica (ja desbloqueia)
+      row.appendChild(b);
+    }
+    blockedList.appendChild(row);
+  }
+}
+
+// ================================================================
+// ADMINISTRADOR
+// ================================================================
+function setAdmin(on){
+  adminUnlocked=on;
+  document.body.classList.toggle('admin',on);
+  $('#admin').textContent=on?'Sair do modo admin':'Administração';
+  updateBlocked();
+}
+
+// Janela propria de login (campo de senha escondido). Devolve {email,password} ou null.
+function askLogin(title,withEmail){
+  return new Promise(resolve=>{
+    const m=$('#modal'),f=$('#loginForm'),em=$('#mEmail'),pw=$('#mPass');
+    $('#mTitle').textContent=title;em.hidden=!withEmail;em.value='';pw.value='';m.hidden=false;
+    (withEmail?em:pw).focus();
+    const close=v=>{m.hidden=true;f.onsubmit=null;$('#mCancel').onclick=null;pw.value='';resolve(v)};
+    f.onsubmit=e=>{e.preventDefault();close({email:em.value.trim(),password:pw.value})};
+    $('#mCancel').onclick=()=>close(null);
+  });
+}
+
+$('#admin').onclick=async()=>{
+  if(adminUnlocked){                                  // clicar de novo = sair
+    if(sb)await sb.auth.signOut();
+    currentUser=null;setAdmin(false);return;
+  }
+  if(sb){
+    // Login real: Supabase Auth + tabela "profiles" com is_admin
+    const cred=await askLogin('Administração',true);
+    if(!cred||!cred.email||!cred.password)return;
+    const {data,error}=await sb.auth.signInWithPassword({email:cred.email,password:cred.password});
+    if(error){alert('Login recusado: '+supabaseErrorText(error)+'\n\nConfirme se o e-mail está cadastrado e confirmado no Supabase Auth.');return}
+    currentUser=data.user;
+    const {data:profile,error:pe}=await sb.from('profiles').select('is_admin').eq('id',currentUser.id).maybeSingle();
+    if(pe){
+      await sb.auth.signOut();currentUser=null;
+      alert('Login realizado, mas não foi possível consultar o perfil de administrador:\n\n'+supabaseErrorText(pe)+'\n\nVerifique a tabela profiles e a política SELECT para usuários autenticados.');
+      return;
+    }
+    if(profile?.is_admin!==true){
+      await sb.auth.signOut();currentUser=null;
+      alert('Este e-mail entrou no Supabase, mas não possui is_admin=true na tabela profiles.');
+      return;
+    }
+    setAdmin(true);await loadRemoteBlocks(true);alert('Modo administrativo ativado.');
+  }else{
+    // Modo local (sem Supabase): compara o hash SHA-256 da senha
+    const cred=await askLogin('Senha administrativa',false);
+    if(!cred||!cred.password)return;
+    if(!(window.crypto&&crypto.subtle)){alert('A verificação de senha exige HTTPS (ou localhost).');return}
+    const digest=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(cred.password));
+    const h=[...new Uint8Array(digest)].map(x=>x.toString(16).padStart(2,'0')).join('');
+    if(h===ADMIN_HASH){setAdmin(true);draw();alert('Modo administrativo ativado. Toque nas ruas para bloquear/liberar.')}
+    else alert('Senha incorreta.');
+  }
+};
+
+// ================================================================
+// BUSCA
+// ================================================================
+function go(){$('#search').blur();selectHouse(Number($('#search').value),{focus:true})}  // blur fecha o teclado do celular
+$('#go').onclick=go;
+$('#search').onkeydown=e=>{if(e.key==='Enter')go()};
+$('#clear').onclick=()=>{
+  routeG.innerHTML='';selectedHouse=null;draw();
+  statusEl.textContent='Aguardando destino.';detailsEl.textContent='Nenhuma rota calculada.';
+  fitAll(true);
+};
+
+// ================================================================
+// ZOOM E ARRASTAR  (era o problema no celular)
+//
+// Antes: so existia roda do mouse e arrastar com "x2" fixo -> nada de pinca,
+// e a velocidade do arrasto ficava errada fora do desktop.
+// Agora usamos Pointer Events:
+//   1 dedo/mouse  -> arrasta
+//   2 dedos       -> pinca (zoom) + arrasta junto
+//   roda do mouse -> zoom no ponto do cursor
+// e convertemos pixels da tela em unidades do SVG (toSvg), entao o movimento
+// acompanha exatamente o dedo, em qualquer tamanho de tela.
+// ================================================================
+const MIN_K=0.6, MAX_K=10;
+let T={x:0,y:0,k:1};                                  // translate (x,y) e escala (k) do grupo #view
+let animId=0;
+
+function applyView(){view.setAttribute('transform',`translate(${T.x} ${T.y}) scale(${T.k})`)}
+// Impede de "perder" o mapa para fora da tela
+function clampView(){
+  T.k=Math.min(MAX_K,Math.max(MIN_K,T.k));
+  const m=200;
+  T.x=Math.min(MAP_W-m,Math.max(m-MAP_W*T.k,T.x));
+  T.y=Math.min(MAP_H-m,Math.max(m-MAP_H*T.k,T.y));
+}
+// Pixel da tela -> coordenada do SVG (considera viewBox e "meet")
+function toSvg(cx,cy){
+  const m=svg.getScreenCTM();
+  if(!m)return{x:cx,y:cy};
+  const pt=svg.createSVGPoint();pt.x=cx;pt.y=cy;
+  return pt.matrixTransform(m.inverse());
+}
+// Zoom mantendo fixo o ponto (px,py) -> o que esta sob o dedo/cursor nao "foge"
+function zoomAt(px,py,factor){
+  const k2=Math.min(MAX_K,Math.max(MIN_K,T.k*factor)), f=k2/T.k;
+  T.x=px-(px-T.x)*f;T.y=py-(py-T.y)*f;T.k=k2;
+  clampView();applyView();
+}
+// Area do SVG hoje visivel, em unidades do SVG
+function visibleBox(){
+  const r=svg.getBoundingClientRect(), a=toSvg(r.left,r.top), b=toSvg(r.right,r.bottom);
+  return{x:a.x,y:a.y,w:b.x-a.x,h:b.y-a.y};
+}
+// Transicao suave ate o estado "to"
+function animateTo(to,ms=380){
+  const id=++animId, from={...T}, t0=performance.now();
+  (function step(now){
+    if(id!==animId)return;                            // usuario mexeu: cancela
+    const u=Math.min(1,(now-t0)/ms), e=1-Math.pow(1-u,3);
+    T.x=from.x+(to.x-from.x)*e;T.y=from.y+(to.y-from.y)*e;T.k=from.k+(to.k-from.k)*e;
+    applyView();if(u<1)requestAnimationFrame(step);
+  })(t0);
+}
+// Enquadra uma caixa {x1,y1,x2,y2} (em coordenadas do mapa) na tela
+function focusBox(b){
+  const v=visibleBox(), pad=140;
+  const bw=Math.max(1,b.x2-b.x1)+pad*2, bh=Math.max(1,b.y2-b.y1)+pad*2;
+  const k=Math.min(MAX_K,Math.max(MIN_K,Math.min(v.w/bw,v.h/bh)));
+  const cx=(b.x1+b.x2)/2, cy=(b.y1+b.y2)/2;
+  animateTo({k,x:v.x+v.w/2-cx*k,y:v.y+v.h/2-cy*k});
+}
+function fitAll(smooth){
+  const to={x:0,y:0,k:1};
+  if(smooth)animateTo(to);else{animId++;T=to;applyView()}
+}
+
+// ---- Gestos ----
+const ptrs=new Map();                                 // ponteiros ativos (dedos/mouse)
+let moved=false, startPos=null, pinch=null;
+
+svg.addEventListener('pointerdown',e=>{
+  animId++;                                           // cancela animacao em andamento
+  ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  if(ptrs.size===1){moved=false;startPos={x:e.clientX,y:e.clientY}}
+  if(ptrs.size===2){
+    const [A,B]=[...ptrs.values()];
+    pinch={dist:Math.hypot(A.x-B.x,A.y-B.y)||1,mid:{x:(A.x+B.x)/2,y:(A.y+B.y)/2}};
+    moved=true;                                       // gesto de 2 dedos nunca conta como "toque"
+  }
+});
+svg.addEventListener('pointermove',e=>{
+  const p=ptrs.get(e.pointerId);if(!p)return;
+  const prev={x:p.x,y:p.y};p.x=e.clientX;p.y=e.clientY;
+  if(ptrs.size===1){
+    // So comeca a arrastar depois de 6 px: assim um toque simples ainda seleciona casa/rua
+    if(!moved){
+      if(Math.hypot(e.clientX-startPos.x,e.clientY-startPos.y)<6)return;
+      moved=true;svg.classList.add('drag');
+      try{svg.setPointerCapture(e.pointerId)}catch{}  // continua recebendo o arrasto fora do mapa
+    }
+    const a=toSvg(prev.x,prev.y), b=toSvg(e.clientX,e.clientY);
+    T.x+=b.x-a.x;T.y+=b.y-a.y;clampView();applyView();
+  }else if(ptrs.size===2&&pinch){
+    const [A,B]=[...ptrs.values()];
+    const dist=Math.hypot(A.x-B.x,A.y-B.y)||1, mid={x:(A.x+B.x)/2,y:(A.y+B.y)/2};
+    const m1=toSvg(pinch.mid.x,pinch.mid.y), m2=toSvg(mid.x,mid.y);
+    T.x+=m2.x-m1.x;T.y+=m2.y-m1.y;                    // acompanha o movimento do centro dos dedos
+    zoomAt(m2.x,m2.y,dist/pinch.dist);                // e aplica o fator da pinca
+    pinch={dist,mid};
+  }
+});
+function endPointer(e){
+  ptrs.delete(e.pointerId);pinch=null;
+  if(ptrs.size===0){
+    svg.classList.remove('drag');
+    setTimeout(()=>{moved=false},60);                 // pequeno atraso: o "click" fantasma pos-arrasto ainda e ignorado
+  }
+}
+svg.addEventListener('pointerup',endPointer);
+svg.addEventListener('pointercancel',endPointer);     // (removido pointerleave: interrompia o arrasto ao sair da borda)
+// Se houve arrasto/pinca, engole o click para nao selecionar casa/rua sem querer
+svg.addEventListener('click',e=>{if(moved){e.stopPropagation();e.preventDefault()}},true);
+
+// Roda do mouse / pinca do touchpad (ctrl+roda): zoom no ponto do cursor
+svg.addEventListener('wheel',e=>{
+  e.preventDefault();animId++;
+  const dy=e.deltaMode===1?e.deltaY*33:e.deltaY;       // Firefox envia em "linhas"
+  const p=toSvg(e.clientX,e.clientY);
+  zoomAt(p.x,p.y,Math.exp(-dy*0.0015));
+},{passive:false});
+
+// Botoes + / − / ⌂ / ☰
+function zoomCenter(f){const v=visibleBox();animId++;zoomAt(v.x+v.w/2,v.y+v.h/2,f)}
+$('#zin').onclick=()=>zoomCenter(1.5);
+$('#zout').onclick=()=>zoomCenter(1/1.5);
+$('#zfit').onclick=()=>fitAll(true);
+$('#ztoggle').onclick=()=>document.body.classList.toggle('noside');
+
+// ================================================================
+// INICIO
+// ================================================================
+drawBase();
+draw();
+loadRemoteBlocks();
+// Atualiza bloqueios a cada 5 s, mas so com a aba visivel (economiza bateria e dados no celular)
+setInterval(()=>{if(!document.hidden)loadRemoteBlocks()},5000);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)loadRemoteBlocks()});
+
+</script></body></html>
