@@ -214,20 +214,16 @@ const userLocationG = $('#userLocation');
 let watchId = null;
 let isTracking = false;
 
-// 1) PONTOS DE REFERÊNCIA (Insira as coordenadas reais de Lat/Lng do Google Maps e X/Y do seu SVG)
-const GPS_REF = {
-  p1: { lat: -12.1576121, lng: -38.3776927, x: 64, y: 1300 },   // Exemplo: Portaria/Entrada
-  p2: { lat: -12.1561815, lng: -38.3744737, x: 3216, y: 70 }  // Exemplo: Ponto no fundo do condomínio
-};
+// PONTOS DE REFERÊNCIA: o Python substitui {"p1": {"lat": -12.157608950109813, "lng": -38.37773439871114, "x": 160.0, "y": 1230.0}, "p2": {"numero": 173, "lat": -12.156140601061018, "lng": -38.374402686126054, "x": 3310, "y": 76.83}, "p3": {"numero": 133, "lat": -12.159224576134623, "lng": -38.37600728689805, "x": 3310, "y": 1423.17}, "transform": {"x": [1226766.1637287496, -638289.8325690466, 39320587.81970219], "y": [-199455.6712263857, -332782.61032747105, -11699267.616394518]}} ao gerar o HTML.
+const GPS_REF = {"p1": {"lat": -12.157608950109813, "lng": -38.37773439871114, "x": 160.0, "y": 1230.0}, "p2": {"numero": 173, "lat": -12.156140601061018, "lng": -38.374402686126054, "x": 3310, "y": 76.83}, "p3": {"numero": 133, "lat": -12.159224576134623, "lng": -38.37600728689805, "x": 3310, "y": 1423.17}, "transform": {"x": [1226766.1637287496, -638289.8325690466, 39320587.81970219], "y": [-199455.6712263857, -332782.61032747105, -11699267.616394518]}};
 
 // Converte a coordenada geográfica (GPS) para coordenada cartesiana do SVG
 function gpsToSvg(lat, lng) {
-  const scaleX = (GPS_REF.p2.x - GPS_REF.p1.x) / (GPS_REF.p2.lng - GPS_REF.p1.lng);
-  const scaleY = (GPS_REF.p2.y - GPS_REF.p1.y) / (GPS_REF.p2.lat - GPS_REF.p1.lat);
-  
-  const x = GPS_REF.p1.x + (lng - GPS_REF.p1.lng) * scaleX;
-  const y = GPS_REF.p1.y + (lat - GPS_REF.p1.lat) * scaleY;
-  return { x, y };
+  const t = GPS_REF.transform;
+  return {
+    x: t.x[0] * lng + t.x[1] * lat + t.x[2],
+    y: t.y[0] * lng + t.y[1] * lat + t.y[2]
+  };
 }
 
 // Alterna o rastreamento via GPS
@@ -412,6 +408,9 @@ function walkable(r,c,ignoreBlocked=false){
 // DESENHO
 // ================================================================
 function areaRect(a){return{x:colX(a.col)+7,y:rowY(a.row)+7,w:(a.col2-a.col+1)*CELL_W-14,h:(a.row2-a.row+1)*CELL_H-14}}
+// As ruas ocupam a célula inteira. O desenho anterior usava areaRect(),
+// que deixa 7px de margem em cada lado e criava vãos entre trechos vizinhos.
+function roadRect(a){return{x:colX(a.col),y:rowY(a.row),w:(a.col2-a.col+1)*CELL_W,h:(a.row2-a.row+1)*CELL_H}}
 
 // Linhas da grade: nunca mudam, entao desenhamos so uma vez
 function drawBase(){
@@ -427,7 +426,7 @@ function draw(){
   for(const r of ROADS){
     const g=el('g',{'data-road-key':r.road_key||r.name},roadsG);
     for(const part of parts(r)){
-      const q=areaRect(part), horizontal=q.w>=q.h;
+      const q=roadRect(part), horizontal=q.w>=q.h;
       // a "pista" tem 30 de largura, centralizada no trecho
       const lane=horizontal?{x:q.x,y:q.y+q.h/2-15,width:q.w,height:30}:{x:q.x+q.w/2-15,y:q.y,width:30,height:q.h};
       const isExit=/SAIDA/.test(r.name), isEntry=/ENTRADA/.test(r.name);
@@ -547,10 +546,29 @@ function houseAccessCandidates(h,targetRow,ignoreBlocked=false){
 function bestPath(h,targetRow,start,ignoreBlocked){
   const cands=h.special?[{r:targetRow,c:MARKER.col-1,kind:'vertical-street'}]:houseAccessCandidates(h,targetRow,ignoreBlocked);
   const front=cands.filter(x=>x.kind==='front'||x.kind==='vertical-street');
-  const goals=front.length?front:cands;             // prefere a frente; se nao houver, usa a lateral
+  const goals=front.length?front:cands;            // prefere a frente; se nao houver, usa a lateral
   let best=null;
   for(const goal of goals){const t=astar(start,goal,ignoreBlocked);if(t&&(!best||t.length<best.length))best=t}
   return best;
+}
+
+// Converte os pontos da rota em um caminho com cantos arredondados.
+// O A* continua andando em células ortogonais; apenas a apresentação fica suave.
+function roundedPath(points,radius=20){
+  if(!points.length)return '';
+  if(points.length===1)return `M ${points[0][0]} ${points[0][1]}`;
+  const dist=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
+  let d=`M ${points[0][0]} ${points[0][1]}`;
+  for(let i=1;i<points.length-1;i++){
+    const prev=points[i-1], cur=points[i], next=points[i+1];
+    const rr=Math.min(radius,dist(prev,cur)/2,dist(cur,next)/2);
+    const a=[cur[0]+(prev[0]-cur[0])*rr/(dist(prev,cur)||1),cur[1]+(prev[1]-cur[1])*rr/(dist(prev,cur)||1)];
+    const b=[cur[0]+(next[0]-cur[0])*rr/(dist(cur,next)||1),cur[1]+(next[1]-cur[1])*rr/(dist(cur,next)||1)];
+    d+=` L ${a[0]} ${a[1]} Q ${cur[0]} ${cur[1]} ${b[0]} ${b[1]}`;
+  }
+  const last=points[points.length-1];
+  d+=` L ${last[0]} ${last[1]}`;
+  return d;
 }
 
 // Desenha a rota. Amarela = normal. Laranja = alternativa que passa por bloqueio.
@@ -565,10 +583,9 @@ function renderRoute(path,n,isFallback,focus){
   });
   if(ENTRADA)pts.unshift([colX(ENTRADA.col),rowY(ENTRADA.row)+30]);   // comeca na boca da entrada
 
-  const polyPts=pts.map(p=>p.join(',')).join(' ');
-  const pathD=pts.map((p,i)=>`${i?'L':'M'} ${p[0]} ${p[1]}`).join(' ');
-  el('polyline',{points:polyPts,class:isFallback?'routeFallbackGlow':'routeGlow'},routeG);
-  el('polyline',{points:polyPts,class:isFallback?'routeFallback':'route','marker-end':isFallback?'url(#arrowBlocked)':'url(#arrow)'},routeG);
+  const pathD=roundedPath(pts,Math.min(22,CELL_W*.22));
+  el('path',{d:pathD,class:isFallback?'routeFallbackGlow':'routeGlow'},routeG);
+  el('path',{d:pathD,class:isFallback?'routeFallback':'route','marker-end':isFallback?'url(#arrowBlocked)':'url(#arrow)'},routeG);
 
   // Bolinha animada percorrendo a rota
   const ball=el('circle',{cx:0,cy:0,r:10,class:`routeBall ${isFallback?'fallback':''}`},routeG);
