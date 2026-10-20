@@ -73,6 +73,7 @@ aside{width:280px;padding:14px;background:linear-gradient(180deg,#11283a,#0d1f2d
 .laser{fill:url(#laser);stroke:#d954c6;stroke-width:3}.laser.typo{stroke:#e0a04a}
 .road{fill:#24475b;stroke:#638998;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .road.connector,.road.visual{stroke:none!important}
+.frontage{fill:#6f9f76;stroke:#9bc69e;stroke-width:1;opacity:.58;pointer-events:none}
 .admin .road{cursor:pointer}               /* so mostra a "maozinha" para o admin */
 .road.exit{fill:#4f3b1b;stroke:#e2b35a;stroke-width:3}
 .road.entry{fill:#214b3d;stroke:#62c995;stroke-width:3}
@@ -145,7 +146,7 @@ aside{width:280px;padding:14px;background:linear-gradient(180deg,#11283a,#0d1f2d
       <!-- #view e o grupo que recebe translate+scale (zoom e arrastar) -->
       <g id="view">
         <rect id="bg" width="3500" height="1750" fill="url(#grid)"/>
-        <g id="plantBase"></g><g id="roads"></g><g id="lasers"></g>
+        <g id="plantBase"></g><g id="roads"></g><g id="lasers"></g><g id="frontage"></g>
         <g id="route"></g><g id="houses"></g><g id="portaria"></g>
         <g id="userLocation"></g> <!-- Camada da Geolocalização -->
       </g>
@@ -316,7 +317,7 @@ const colX=c=>OX+c*CELL_W, rowY=r=>OY+r*CELL_H;
 
 // ---------- Atalhos de elementos ----------
 const svg=$('#map'), view=$('#view');
-const plantG=$('#plantBase'), roadsG=$('#roads'), lasersG=$('#lasers'),
+const plantG=$('#plantBase'), roadsG=$('#roads'), lasersG=$('#lasers'), frontageG=$('#frontage'),
       housesG=$('#houses'), portariaG=$('#portaria'), routeG=$('#route');
 const statusEl=$('#status'), detailsEl=$('#details'), blockedList=$('#blockedList');
 
@@ -425,7 +426,7 @@ function drawBase(){
 
 function draw(){
   rebuildBlockedCells();
-  roadsG.innerHTML='';lasersG.innerHTML='';housesG.innerHTML='';portariaG.innerHTML='';
+  roadsG.innerHTML='';lasersG.innerHTML='';frontageG.innerHTML='';housesG.innerHTML='';portariaG.innerHTML='';
 
   // ---- Ruas ----
   for(const r of ROADS){
@@ -461,6 +462,34 @@ function draw(){
     const q=areaRect(part);
     el('rect',{x:q.x,y:q.y,width:q.w,height:q.h,rx:5,class:`laser ${a.variant?'typo':''}`},lasersG);
   }
+
+  // Pequena faixa verde de frente para a rua. É somente visual e não recebe
+  // eventos, então não interfere no bloqueio administrativo nem na rota.
+  const frontageRect=(h,side)=>{
+    const spanCols=(h.col2??h.col)-h.col+1, spanRows=(h.row2??h.row)-h.row+1;
+    let x=colX(h.col)+8, y=rowY(h.row)+8, w=spanCols*CELL_W-16, hh=spanRows*CELL_H-16;
+    if(h.special){
+      const slots=(rowY(MARKER.row2+1)-rowY(MARKER.row))/41;
+      w=72;hh=slots-6;x=colX(MARKER.col)+14;y=rowY(MARKER.row)+(173-h.number)*slots+(slots-hh)/2;
+    }
+    const t=6, gap=2;
+    if(side==='top')return{x:x+4,y:y-gap-t,width:Math.max(8,w-8),height:t};
+    if(side==='bottom')return{x:x+4,y:y+hh+gap,width:Math.max(8,w-8),height:t};
+    if(side==='left')return{x:x-gap-t,y:y+4,width:t,height:Math.max(8,hh-8)};
+    return{x:x+w+gap,y:y+4,width:t,height:Math.max(8,hh-8)};
+  };
+  const hasRoad=(h,side)=>{
+    const c1=h.col,c2=h.col2??h.col,r1=h.row,r2=h.row2??h.row;
+    if(side==='top')for(let c=c1;c<=c2;c++)if(walkable(r1-1,c))return true;
+    if(side==='bottom')for(let c=c1;c<=c2;c++)if(walkable(r2+1,c))return true;
+    if(side==='left')for(let r=r1;r<=r2;r++)if(walkable(r,c1-1))return true;
+    if(side==='right')for(let r=r1;r<=r2;r++)if(walkable(r,c2+1))return true;
+    return false;
+  };
+  const frontageList=[...HOUSES];
+  if(MARKER)for(let n=173;n>=133;n--)frontageList.push({number:n,row:MARKER.row,col:MARKER.col,row2:MARKER.row2,col2:MARKER.col2,special:true});
+  for(const h of frontageList)for(const side of ['top','bottom','left','right'])
+    if(hasRoad(h,side))el('rect',{...frontageRect(h,side),rx:3,class:'frontage'},frontageG);
 
   // ---- Portaria ----
   const pq=areaRect(PORTARIA);
