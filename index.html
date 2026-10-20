@@ -46,7 +46,7 @@ button:hover{filter:brightness(1.2)}
 /* touch-action:none = o navegador NAO usa o gesto para rolar/dar zoom na pagina;
    quem trata o toque e o nosso JavaScript (arrastar e pinca). E o ponto
    principal da correcao do celular. */
-svg{width:100%;height:100%;display:block;cursor:grab;background:#0b1824;
+svg{width:100%;height:100%;display:block;cursor:grab;background:#08121b;
   touch-action:none;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}
 svg.drag{cursor:grabbing}
 #view{shape-rendering:geometricPrecision}
@@ -71,13 +71,14 @@ aside{width:280px;padding:14px;background:linear-gradient(180deg,#11283a,#0d1f2d
 .house.selected rect{fill:#d9a441!important;stroke:#fff1c2!important;stroke-width:3!important}
 .house.selected text{fill:#2e2411!important;font-weight:800}
 .laser{fill:url(#laser);stroke:#d954c6;stroke-width:3}.laser.typo{stroke:#e0a04a}
-.road{fill:#24475b;stroke:#638998;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.road{fill:#475a6c;stroke:#8ba2b5;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .road.connector,.road.visual{stroke:none!important}
 .frontage{fill:#6f9f76;stroke:#9bc69e;stroke-width:1;opacity:.58;pointer-events:none}
 .admin .road{cursor:pointer}               /* so mostra a "maozinha" para o admin */
 .road.exit{fill:#4f3b1b;stroke:#e2b35a;stroke-width:3}
 .road.entry{fill:#214b3d;stroke:#62c995;stroke-width:3}
-.roadLabel{fill:#d9ecff;font-size:13px;font-weight:800;pointer-events:none}
+.roadLabel{fill:#e9f5ff;font-weight:800;pointer-events:none;letter-spacing:.04em;
+  paint-order:stroke;stroke:#2a3947;stroke-width:3px;stroke-linejoin:round}  /* contorno escuro = legivel sobre qualquer fundo */
 .route,.routeGlow,.routeFallback,.routeFallbackGlow,.routeBall{pointer-events:none}
 .routeGlow{fill:none;stroke:#e2aa3f;stroke-width:13;opacity:.24;stroke-linecap:round;stroke-linejoin:round}
 .route{fill:none;stroke:#ffd166;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 2px #70531b)}
@@ -437,7 +438,7 @@ function draw(){
       const lane=horizontal?{x:q.x,y:q.y+q.h/2-ROAD_W/2,width:q.w,height:ROAD_W}:{x:q.x+q.w/2-ROAD_W/2,y:q.y,width:ROAD_W,height:q.h};
       const isExit=/SAIDA/.test(r.name), isEntry=/ENTRADA/.test(r.name);
       const connector=Boolean(part.connector), visual=Boolean(v?.fill);
-      const visualLane=visual?{x:q.x,y:q.y,width:q.w,height:q.h}:lane;
+      const visualLane={x:q.x,y:q.y,width:q.w,height:q.h};   // a rua preenche todo o corredor livre
       const rect=el('rect',{...(visual?visualLane:lane),rx:visual?10:(connector?0:ROAD_W/2),
         'stroke-width':visual||connector?0:2,
         class:`road ${isExit?'exit':''} ${isEntry?'entry':''}${connector?' connector':''}${visual?' visual':''}`},g);
@@ -449,9 +450,30 @@ function draw(){
       if(blocked.has(rect.dataset.road))rect.classList.add('blocked');
     }
     if(!/SAIDA|ENTRADA|PORTARIA/.test(r.name)){
-      const q=areaRect(r);
-      const label=el('text',{x:q.x+q.w/2,y:q.y+q.h/2+5,'text-anchor':'middle',class:'roadLabel'},g);
-      label.textContent=r.name;
+      // ---- Nome da rua ----
+      // CORRECAO: antes o nome ia para o centro do retangulo que envolve TODOS os
+      // trechos da rua (areaRect(r)). Em rua com trechos separados ou em L, esse
+      // centro cai fora da pista. Agora o nome fica DENTRO de cada trecho real,
+      // girado nas ruas verticais, com tamanho proporcional a espessura da pista.
+      const real=parts(r).filter(p=>!p.connector);          // ignora as "pontes"
+      for(const p of (real.length?real:parts(r))){
+        const q=roadRect(p);
+        const horizontal=p.visual?.orientation?(p.visual.orientation==='h'):q.w>=q.h;
+        const thick=horizontal?q.h:q.w, length=horizontal?q.w:q.h;
+        let fs=Math.max(12,Math.min(20,thick*0.34));         // proporcional a pista (igual p/ h e v)
+        const textW=r.name.length*fs*0.66;                   // largura aproximada
+        if(textW>length*0.9)fs=Math.max(8,fs*length*0.9/textW);
+        if(r.name.length*fs*0.66>length)continue;            // nao cabe: nao desenha
+        const n=Math.max(1,Math.floor(length/900));          // repete em ruas longas
+        for(let i=0;i<n;i++){
+          const t=(i+0.5)/n;
+          const cx=horizontal?q.x+q.w*t:q.x+q.w/2, cy=horizontal?q.y+q.h/2:q.y+q.h*t;
+          const label=el('text',{x:cx,y:cy,'text-anchor':'middle','dominant-baseline':'central',
+            'font-size':fs,class:'roadLabel',
+            ...(horizontal?{}:{transform:`rotate(-90 ${cx} ${cy})`})},g);
+          label.textContent=r.name;
+        }
+      }
     }
     // So o administrador bloqueia/libera. Visitante tocando na rua nao recebe mais alerta.
     g.addEventListener('click',()=>{if(adminUnlocked)toggleRoad(r)});
@@ -509,7 +531,7 @@ function draw(){
       w=72; hh=slots-6; x=colX(h.col)+14; y=y0+(173-h.number)*slots+(slots-hh)/2;
     }
     const g=el('g',{class:`house ${selectedHouse===h.number?'selected':''}`},housesG);
-    el('rect',{x,y,width:w,height:hh,rx:5,fill:'#1b3d4e',stroke:'#63c6bd','stroke-width':1.5},g);
+    el('rect',{x,y,width:w,height:hh,rx:5,fill:'#143a40',stroke:'#4fd1c0','stroke-width':1.5},g);
     const t=el('text',{x:x+w/2,y:y+hh/2+5,'text-anchor':'middle',fill:'#d7f6f2','font-size':Math.max(8,Math.min(16,w*.38)),'font-weight':'700'},g);
     t.textContent=h.number;
     g.addEventListener('click',()=>selectHouse(h.number,{focus:true}));
