@@ -759,7 +759,7 @@ function renderRoute(path,n,isFallback,focus){
   el('path',{d:pathD,class:isFallback?'routeFallback':'route','marker-end':isFallback?'url(#arrowBlocked)':'url(#arrow)'},routeG);
 
   const ball=el('circle',{cx:0,cy:0,r:10,class:`routeBall ${isFallback?'fallback':''}`},routeG);
-  el('animateMotion',{path:pathD,dur:`${Math.max(1.2,Math.min(5,pts.length*.055))}s`,repeatCount:'1',fill:'freeze',rotate:'auto'},ball);
+  el('animateMotion',{path:pathD,dur:`${Math.max(1.2,Math.min(5,pts.length*.055))}s`,repeatCount:'indefinite',rotate:'auto'},ball);
 
   const first=pts[0], last=pts[pts.length-1];
   el('circle',{cx:first[0],cy:first[1],r:7,fill:'#39e58c',stroke:'#d8ffe8','stroke-width':2},routeG);
@@ -1053,10 +1053,16 @@ draw();
 loadRemoteBlocks();
 setInterval(()=>{if(!document.hidden)loadRemoteBlocks()},60_000);
 document.addEventListener('visibilitychange',()=>{
-  if(document.hidden&&isTracking){
-    if(watchId!==null&&navigator.geolocation)navigator.geolocation.clearWatch(watchId);
-    watchId=null;isTracking=false;$('#zgps').style.background='#244353';
-    statusEl.textContent='GPS pausado enquanto a página estiver oculta.';
-  }else if(!document.hidden)loadRemoteBlocks();
+  if(document.hidden){
+    if(typeof svg.pauseAnimations==='function')svg.pauseAnimations();
+    if(isTracking){
+      if(watchId!==null&&navigator.geolocation)navigator.geolocation.clearWatch(watchId);
+      watchId=null;isTracking=false;$('#zgps').style.background='#244353';
+      statusEl.textContent='GPS pausado enquanto a página estiver oculta.';
+    }
+  }else{
+    if(typeof svg.unpauseAnimations==='function')svg.unpauseAnimations();
+    loadRemoteBlocks();
+  }
 });
 </script></body></html>
